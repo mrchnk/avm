@@ -322,7 +322,7 @@ namespace nanojit
                 n->value = v;
                 return;
             }
-            buckets[i] = new (allocator, alignof<K>()) Seq<Node>(Node(k,v), buckets[i]);
+            buckets[i] = new (allocator, alignof(K)) Seq<Node>(Node(k,v), buckets[i]);
         }
 
         /** return v for element k, or T(0) if k is not present */
