@@ -6,4 +6,4 @@ target_sources(platform
         MathUtilsWin.cpp
         NativeFunctionWin.cpp
         OSDepWin.cpp
-        win64setjml.asm)
+        win64setjmp.asm)

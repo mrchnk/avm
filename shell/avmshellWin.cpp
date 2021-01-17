@@ -12,6 +12,7 @@
 #include "WinFile.h"
 #include <Mmsystem.h>
 
+#pragma comment(lib, "Winmm")
 
 namespace avmshell
 {
