@@ -4,8 +4,6 @@
  
 package com.adobe.test
 {
-    import Utils;
-    
     /*
 	 *	This Assert class is based off of the new ATS Assert class being implemented for AS4.
 	 *	See: https://zerowing.corp.adobe.com/display/flashruntime/V12+ATS+APIs#V12ATSAPIs-AssertionActionScriptAPI
@@ -95,6 +93,7 @@ package com.adobe.test
         public static function expectError(description:String, expectedError:String, testFunction:Function):Boolean
         {
             var actualErrorString:String = "No errors.";
+			var actualError;
             try {
                 testFunction();
             } catch (e:*) {

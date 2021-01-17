@@ -3,6 +3,7 @@ project(avm)
 
 set(CMAKE_CXX_STANDARD 11)
 add_definitions(-DAVMSHELL_BUILD)
+add_definitions(-DDEBUGGER)
 add_executable(avm "")
 
 if (${CMAKE_HOST_WIN32})
@@ -28,6 +29,7 @@ elseif (${CMAKE_HOST_UNIX})
     target_link_libraries(avm PRIVATE shell Threads::Threads)
 endif ()
 
+add_subdirectory(asc)
 add_subdirectory(core)
 add_subdirectory(platform)
 add_subdirectory(extensions)
@@ -42,3 +44,6 @@ add_subdirectory(pcre)
 add_subdirectory(other-licenses/lzma)
 add_subdirectory(other-licenses/zlib)
 add_subdirectory(nanojit)
+
+enable_testing()
+add_subdirectory(test)
