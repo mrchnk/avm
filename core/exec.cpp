@@ -800,7 +800,7 @@ Atom* FASTCALL BaseExecMgr::coerceUnbox1(MethodEnv* env, Atom atom, Traits* t, A
 failure:
     AvmCore* core = env->core();
     env->toplevel()->throwTypeError(kCheckTypeFailedError, core->atomToErrorString(atom), core->toErrorString(t));
-    return unreachableAtom;
+    return nullptr;
 }
 
 // Coerce an argument to an expected type, but keep it represented as Atom.
