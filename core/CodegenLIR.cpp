@@ -125,19 +125,19 @@ return *((intptr_t*)&_method);
 
 namespace avmplus
 {
-        #define COREADDR(f) coreAddr((int (AvmCore::*)())(&f))
-        #define GCADDR(f) gcAddr((int (MMgc::GC::*)())(&f))
-        #define ENVADDR(f) envAddr((int (MethodEnv::*)())(&f))
-        #define ARRAYADDR(f) arrayAddr((int (ArrayObject::*)())(&f))
-        #define STRINGADDR(f) stringAddr((int (String::*)())(&f))
-        #define VECTORINTADDR(f) vectorIntAddr((int (IntVectorObject::*)())(&f))
-        #define VECTORUINTADDR(f) vectorUIntAddr((int (UIntVectorObject::*)())(&f))
-        #define VECTORDOUBLEADDR(f) vectorDoubleAddr((int (DoubleVectorObject::*)())(&f))
-        #define VECTORFLOATADDR(f) vectorFloatAddr((int (FloatVectorObject::*)())(&f))
-        #define VECTORFLOAT4ADDR(f) vectorFloat4Addr((int (Float4VectorObject::*)())(&f))
-        #define VECTOROBJADDR(f) vectorObjAddr((int (ObjectVectorObject::*)())(&f))
-        #define EFADDR(f)   efAddr((int (ExceptionFrame::*)())(&f))
-        #define DEBUGGERADDR(f)   debuggerAddr((int (Debugger::*)())(&f))
+        #define COREADDR(f) (uintptr_t)coreAddr((int (AvmCore::*)())(&f))
+        #define GCADDR(f) (uintptr_t)gcAddr((int (MMgc::GC::*)())(&f))
+        #define ENVADDR(f) (uintptr_t)envAddr((int (MethodEnv::*)())(&f))
+        #define ARRAYADDR(f) (uintptr_t)arrayAddr((int (ArrayObject::*)())(&f))
+        #define STRINGADDR(f) (uintptr_t)stringAddr((int (String::*)())(&f))
+        #define VECTORINTADDR(f) (uintptr_t)vectorIntAddr((int (IntVectorObject::*)())(&f))
+        #define VECTORUINTADDR(f) (uintptr_t)vectorUIntAddr((int (UIntVectorObject::*)())(&f))
+        #define VECTORDOUBLEADDR(f) (uintptr_t)vectorDoubleAddr((int (DoubleVectorObject::*)())(&f))
+        #define VECTORFLOATADDR(f) (uintptr_t)vectorFloatAddr((int (FloatVectorObject::*)())(&f))
+        #define VECTORFLOAT4ADDR(f) (uintptr_t)vectorFloat4Addr((int (Float4VectorObject::*)())(&f))
+        #define VECTOROBJADDR(f) (uintptr_t)vectorObjAddr((int (ObjectVectorObject::*)())(&f))
+        #define EFADDR(f)   (uintptr_t)efAddr((int (ExceptionFrame::*)())(&f))
+        #define DEBUGGERADDR(f)   (uintptr_t)debuggerAddr((int (Debugger::*)())(&f))
         #define FUNCADDR(addr) (uintptr_t)addr
 
         intptr_t coreAddr( int (AvmCore::*f)() )
