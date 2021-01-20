@@ -5,9 +5,13 @@ set(AS3_BASEDIR ${CMAKE_CURRENT_LIST_DIR})
 set(AS3_INCLUDE Assert.as Utils.as)
 set(AS3_TARGET test_acceptance)
 
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+    set(AS3_HASH_NAMES 1)
+endif()
+
+
 include(as3_add_test.cmake)
 include(as3_find_tests.cmake)
-
 
 as3_set_arguments(as3/Array/regress_524122.as USES_SWF_VERSIONS)
 as3_set_arguments(as3/AMF/AMFSerializer_float.as FLOAT)

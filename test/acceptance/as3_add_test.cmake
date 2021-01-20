@@ -1,7 +1,7 @@
 function(as3_add_test arg_TARGET)
     set(options FLOAT GREEDY USES_SWF_VERSIONS WILL_FAIL DISABLED)
     set(oneValueArgs PASS_REGULAR_EXPRESSION)
-    set(multiValueArgs INCLUDE SUPPORT ASC_ARGUMENTS AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS)
+    set(multiValueArgs INCLUDE SUPPORT ASC_ARGUMENTS AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS TEST_ARGUMENTS)
 
     cmake_parse_arguments(PARSE_ARGV 1 arg "${options}" "${oneValueArgs}" "${multiValueArgs}")
 
@@ -13,6 +13,11 @@ function(as3_add_test arg_TARGET)
     get_filename_component(dir ${arg_TARGET} DIRECTORY)
 
     string(REPLACE "/" "_" test_name "test_${dir}_${name}")
+    if (AS3_HASH_NAMES)
+        string(SHA1 test_name ${test_name})
+        string(SUBSTRING ${test_name} 0 8 test_name)
+        set(test_name "test__${test_name}")
+    endif()
 
     if (NOT arg_ASC_ARGUMENTS)
         set(arg_ASC_ARGUMENTS -AS3 -optimize)
@@ -48,14 +53,7 @@ function(as3_add_test arg_TARGET)
         list(APPEND avm_arguments ${abc})
     endforeach()
 
-    foreach(inc ${arg_INCLUDE})
-        get_filename_component(inc ${inc} ABSOLUTE)
-        list(APPEND test_sources ${inc})
-        file(RELATIVE_PATH inc ${AS3_BASEDIR} ${inc})
-        list(APPEND asc_arguments -in ${inc})
-    endforeach()
-
-    foreach(inc ${AS3_INCLUDE})
+    foreach(inc ${arg_INCLUDE} ${AS3_INCLUDE})
         get_filename_component(inc ${inc} ABSOLUTE)
         list(APPEND test_sources ${inc})
         file(RELATIVE_PATH inc ${AS3_BASEDIR} ${inc})
@@ -66,13 +64,18 @@ function(as3_add_test arg_TARGET)
 
     add_custom_target(${test_name}
             ${commands}
+            COMMENT Building ${arg_TARGET} for test ${test_name}
             WORKING_DIRECTORY ${AS3_BASEDIR}
             SOURCES ${test_sources})
+
+    if (arg_TEST_ARGUMENTS)
+        set(test_arguments "--" ${arg_TEST_ARGUMENTS})
+    endif()
 
     if (arg_SWF_VERSIONS)
         foreach(swf_ver ${arg_SWF_VERSIONS})
             add_test(NAME ${test_name}_SWF_${swf_ver}
-                    COMMAND avm -swfversion ${swf_ver} ${avm_arguments} ${dir}/${name}.abc
+                    COMMAND avm -swfversion ${swf_ver} ${avm_arguments} ${dir}/${name}.abc ${test_arguments}
                     WORKING_DIRECTORY ${AS3_BASEDIR})
             if (arg_WILL_FAIL)
                 set_tests_properties(${test_name}_SWF_${swf_ver} PROPERTIES WILL_FAIL 1)
@@ -87,7 +90,7 @@ function(as3_add_test arg_TARGET)
     elseif(arg_API_VERSIONS)
         foreach(api_ver ${arg_API_VERSIONS})
             add_test(NAME ${test_name}_API_${api_ver}
-                    COMMAND avm -api ${api_ver} ${avm_arguments} ${dir}/${name}.abc
+                    COMMAND avm -api ${api_ver} ${avm_arguments} ${dir}/${name}.abc ${test_arguments}
                     WORKING_DIRECTORY ${AS3_BASEDIR})
 
             if (arg_WILL_FAIL)
@@ -101,9 +104,8 @@ function(as3_add_test arg_TARGET)
             endif()
         endforeach()
     else()
-
         add_test(NAME ${test_name}
-                COMMAND avm ${avm_arguments} ${dir}/${name}.abc
+                COMMAND avm ${avm_arguments} ${dir}/${name}.abc ${test_arguments}
                 WORKING_DIRECTORY ${AS3_BASEDIR})
 
         if (arg_WILL_FAIL)
