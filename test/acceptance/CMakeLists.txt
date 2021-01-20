@@ -7,7 +7,7 @@ set(AS3_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/Assert.as ${CMAKE_CURRENT_LIST_DIR}/Ut
 set(AS3_TARGET test_acceptance)
 
 if (CMAKE_GENERATOR MATCHES "Visual Studio")
-    set(AS3_HASH_NAMES 1)
+    set(AS3_HASH_TARGET 1)
 endif()
 
 include(as3_add_test.cmake)

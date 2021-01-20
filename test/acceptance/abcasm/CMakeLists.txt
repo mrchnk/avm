@@ -7,7 +7,7 @@ set(AS3_PREFIX test_abcasm)
 set(AS3_BASEDIR ${CMAKE_CURRENT_LIST_DIR})
 set(AS3_DEPENDS test_abs_helper)
 
-set(AS3_HASH_NAMES 0)
+set(AS3_HASH_TARGET 0)
 
 as3_set_arguments(*.abs AVM_ARGUMENTS abs_helper.abc)
 as3_set_arguments(coverage/float/*.abs FLOAT)

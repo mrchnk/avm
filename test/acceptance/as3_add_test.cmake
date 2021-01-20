@@ -1,7 +1,7 @@
 function(as3_add_test arg_TARGET)
-    set(options FLOAT GREEDY USES_SWF_VERSIONS WILL_FAIL DISABLED)
+    set(options FLOAT GREEDY USES_SWF_VERSIONS WILL_FAIL DISABLED SHELL)
     set(oneValueArgs PASS_REGULAR_EXPRESSION)
-    set(multiValueArgs INCLUDE SUPPORT ASC_ARGUMENTS AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS TEST_ARGUMENTS)
+    set(multiValueArgs INCLUDE SUPPORT DEPENDS ASC_ARGUMENTS AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS TEST_ARGUMENTS)
 
     cmake_parse_arguments(PARSE_ARGV 1 arg "${options}" "${oneValueArgs}" "${multiValueArgs}")
 
@@ -12,11 +12,19 @@ function(as3_add_test arg_TARGET)
     get_filename_component(name ${arg_TARGET} NAME_WLE)
     get_filename_component(dir ${arg_TARGET} DIRECTORY)
 
-    string(REPLACE "/" "_" test_name "test_${dir}_${name}")
-    if (AS3_HASH_NAMES)
-        string(SHA1 test_name ${test_name})
-        string(SUBSTRING ${test_name} 0 8 test_name)
-        set(test_name "test__${test_name}")
+    if (NOT dir)
+        set(dir .)
+        set(test_name "${AS3_PREFIX}_${name}")
+    else()
+        string(REPLACE "/" "_" test_name "${AS3_PREFIX}_${dir}_${name}")
+    endif()
+
+    if (AS3_HASH_TARGET)
+        string(SHA1 target_name ${test_name})
+        string(SUBSTRING ${target_name} 0 8 target_name)
+        set(target_name "${AS3_PREFIX}__${target_name}")
+    else()
+        set(target_name ${test_name})
     endif()
 
     if (NOT arg_ASC_ARGUMENTS)
@@ -31,14 +39,8 @@ function(as3_add_test arg_TARGET)
         set(arg_SWF_VERSIONS 9 10 11 12 13 14 15 16 17 18)
     endif()
 
-    foreach(arg ${arg_ASC_ARGUMENTS})
-        list(APPEND asc_arguments ${arg})
-    endforeach()
-
-    foreach(arg ${arg_AVM_ARGUMENTS})
-        list(APPEND avm_arguments ${arg})
-    endforeach()
-
+    set(asc_arguments ${arg_ASC_ARGUMENTS})
+    set(avm_arguments ${arg_AVM_ARGUMENTS})
     set(commands "")
 
     foreach(src ${arg_SUPPORT})
@@ -62,20 +64,33 @@ function(as3_add_test arg_TARGET)
 
     list(APPEND commands COMMAND ${ASC} ${asc_arguments} ${arg_TARGET})
 
-    add_custom_target(${test_name}
+    add_custom_target(${target_name}
             ${commands}
             COMMENT Building ${arg_TARGET} for test ${test_name}
             WORKING_DIRECTORY ${AS3_BASEDIR}
             SOURCES ${test_sources})
 
+    if (arg_DEPENDS)
+        add_dependencies(${target_name} ${arg_DEPENDS})
+    endif()
+
+    if (AS3_DEPENDS)
+        add_dependencies(${target_name} ${AS3_DEPENDS})
+    endif()
+
+    if (NOT arg_DISABLED)
+        add_dependencies(${AS3_TARGET} ${target_name})
+    endif()
+
+    list(APPEND avm_arguments ${dir}/${name}.abc)
     if (arg_TEST_ARGUMENTS)
-        set(test_arguments "--" ${arg_TEST_ARGUMENTS})
+        list(APPEND avm_arguments "--" ${arg_TEST_ARGUMENTS})
     endif()
 
     if (arg_SWF_VERSIONS)
         foreach(swf_ver ${arg_SWF_VERSIONS})
             add_test(NAME ${test_name}_SWF_${swf_ver}
-                    COMMAND avm -swfversion ${swf_ver} ${avm_arguments} ${dir}/${name}.abc ${test_arguments}
+                    COMMAND avm -swfversion ${swf_ver} ${avm_arguments}
                     WORKING_DIRECTORY ${AS3_BASEDIR})
             if (arg_WILL_FAIL)
                 set_tests_properties(${test_name}_SWF_${swf_ver} PROPERTIES WILL_FAIL 1)
@@ -90,7 +105,7 @@ function(as3_add_test arg_TARGET)
     elseif(arg_API_VERSIONS)
         foreach(api_ver ${arg_API_VERSIONS})
             add_test(NAME ${test_name}_API_${api_ver}
-                    COMMAND avm -api ${api_ver} ${avm_arguments} ${dir}/${name}.abc ${test_arguments}
+                    COMMAND avm -api ${api_ver} ${avm_arguments}
                     WORKING_DIRECTORY ${AS3_BASEDIR})
 
             if (arg_WILL_FAIL)
@@ -105,7 +120,7 @@ function(as3_add_test arg_TARGET)
         endforeach()
     else()
         add_test(NAME ${test_name}
-                COMMAND avm ${avm_arguments} ${dir}/${name}.abc ${test_arguments}
+                COMMAND avm ${avm_arguments}
                 WORKING_DIRECTORY ${AS3_BASEDIR})
 
         if (arg_WILL_FAIL)
@@ -119,7 +134,4 @@ function(as3_add_test arg_TARGET)
         endif()
     endif()
 
-    if (NOT arg_DISABLED)
-        add_dependencies(${AS3_TARGET} ${test_name})
-    endif()
 endfunction()
