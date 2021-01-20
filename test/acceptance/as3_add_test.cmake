@@ -1,7 +1,7 @@
 function(as3_add_test arg_TARGET)
     set(options FLOAT GREEDY USES_SWF_VERSIONS WILL_FAIL DISABLED)
     set(oneValueArgs PASS_REGULAR_EXPRESSION)
-    set(multiValueArgs INCLUDE SOURCES ASC_ARGUMENTS AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS)
+    set(multiValueArgs INCLUDE SUPPORT ASC_ARGUMENTS AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS)
 
     cmake_parse_arguments(PARSE_ARGV 1 arg "${options}" "${oneValueArgs}" "${multiValueArgs}")
 
@@ -36,7 +36,7 @@ function(as3_add_test arg_TARGET)
 
     set(commands "")
 
-    foreach(src ${arg_SOURCES})
+    foreach(src ${arg_SUPPORT})
         get_filename_component(src ${src} ABSOLUTE)
         list(APPEND test_sources ${src})
         file(RELATIVE_PATH src ${AS3_BASEDIR} ${src})
