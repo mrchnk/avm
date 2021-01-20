@@ -55,7 +55,7 @@ as3_set_arguments(misc/testJitordieSwitch.as AVM_ARGUMENTS -Djitordie PASS_REGUL
 as3_set_arguments(mmgc/memlimit.as AVM_ARGUMENTS -memlimit 10240)
 as3_set_arguments(mmgc/memstats.as AVM_ARGUMENTS -memstat)
 as3_set_arguments(mmgc/outofmemory.as AVM_ARGUMENTS -memlimit 1024 WILL_FAIL)
-as3_set_arguments(mops/*.as ASC_ARGUMENTS -AS3 -optimize -import as3_find_testsd/intrinsics.abc_ AVM_ARGUMENTS as3_find_testsd/intrinsics.abc_)
+as3_set_arguments(mops/*.as ASC_ARGUMENTS -AS3 -optimize -import generated/intrinsics.abc_ AVM_ARGUMENTS generated/intrinsics.abc_)
 as3_set_arguments(regress/bug_515935.as WILL_FAIL)
 as3_set_arguments(regress/security/bug567284.as TEST_ARGUMENTS regress/security/bug567284_support/ SHELL)
 as3_set_arguments(regress/security/bug_441280.as SHELL)
