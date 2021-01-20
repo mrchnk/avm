@@ -1,6 +1,7 @@
 add_custom_target(test_acceptance)
 add_dependencies(test_acceptance avm)
 
+set(AS3_PREFIX test)
 set(AS3_BASEDIR ${CMAKE_CURRENT_LIST_DIR})
 set(AS3_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/Assert.as ${CMAKE_CURRENT_LIST_DIR}/Utils.as)
 set(AS3_TARGET test_acceptance)
@@ -9,9 +10,9 @@ if (CMAKE_GENERATOR MATCHES "Visual Studio")
     set(AS3_HASH_NAMES 1)
 endif()
 
-
 include(as3_add_test.cmake)
-include(as3_find_tests.cmake)
+include(abs_add_test.cmake)
+include(find_tests.cmake)
 
 as3_set_arguments(as3/Array/regress_524122.as USES_SWF_VERSIONS)
 as3_set_arguments(as3/AMF/AMFSerializer_float.as FLOAT)
@@ -87,4 +88,5 @@ as3_find_tests(test_regress regress)
 as3_find_tests(test_regress regress/security)
 as3_find_tests(test_versioning versioning)
 
+add_subdirectory(abcasm)
 add_subdirectory(spidermonkey)

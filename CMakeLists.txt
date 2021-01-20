@@ -30,6 +30,7 @@ elseif (${CMAKE_HOST_UNIX})
 endif ()
 
 add_subdirectory(asc)
+add_subdirectory(abcasm)
 add_subdirectory(core)
 add_subdirectory(platform)
 add_subdirectory(extensions)
