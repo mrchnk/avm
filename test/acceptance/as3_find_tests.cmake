@@ -4,6 +4,12 @@ function(as3_find_tests_at dir)
         return()
     endif ()
 
+    file(RELATIVE_PATH test_name ${AS3_BASEDIR} ${dir})
+    string(REPLACE "/" "_" test_name "test_${test_name}")
+    add_custom_target(${test_name})
+    add_dependencies(${AS3_TARGET} ${test_name})
+    set(AS3_TARGET ${test_name})
+
     foreach (test ${tests})
         get_filename_component(src ${test} NAME)
         get_filename_component(src_name ${test} NAME_WLE)
