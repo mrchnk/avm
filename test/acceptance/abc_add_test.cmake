@@ -1,13 +1,19 @@
 function(abc_add_test arg_TARGET)
     set(options FLOAT GREEDY USES_SWF_VERSIONS WILL_FAIL DISABLED)
-    set(oneValueArgs PASS_REGULAR_EXPRESSION)
+    set(oneValueArgs PASS_REGULAR_EXPRESSION WORKING_DIRECTORY)
     set(multiValueArgs AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS TEST_ARGUMENTS DEPENDS)
 
     cmake_parse_arguments(PARSE_ARGV 1 arg "${options}" "${oneValueArgs}" "${multiValueArgs}")
 
     get_filename_component(arg_TARGET ${arg_TARGET} ABSOLUTE)
 
-    file(RELATIVE_PATH arg_TARGET ${AS3_BASEDIR} ${arg_TARGET})
+    if (arg_WORKING_DIRECTORY)
+        get_filename_component(working_directory ${arg_WORKING_DIRECTORY} ABSOLUTE)
+    else()
+        set(working_directory ${CMAKE_CURRENT_LIST_DIR})
+    endif()
+
+    file(RELATIVE_PATH arg_TARGET ${working_directory} ${arg_TARGET})
     get_filename_component(name ${arg_TARGET} NAME_WLE)
     get_filename_component(dir ${arg_TARGET} DIRECTORY)
 
@@ -35,7 +41,7 @@ function(abc_add_test arg_TARGET)
         foreach(swf_ver ${arg_SWF_VERSIONS})
             add_test(NAME ${test_name}_SWF_${swf_ver}
                     COMMAND avm -swfversion ${swf_ver} ${avm_arguments}
-                    WORKING_DIRECTORY ${AS3_BASEDIR})
+                    WORKING_DIRECTORY ${working_directory})
             if (arg_WILL_FAIL)
                 set_tests_properties(${test_name}_SWF_${swf_ver} PROPERTIES WILL_FAIL 1)
             endif()
@@ -50,7 +56,7 @@ function(abc_add_test arg_TARGET)
         foreach(api_ver ${arg_API_VERSIONS})
             add_test(NAME ${test_name}_API_${api_ver}
                     COMMAND avm -api ${api_ver} ${avm_arguments}
-                    WORKING_DIRECTORY ${AS3_BASEDIR})
+                    WORKING_DIRECTORY ${working_directory})
 
             if (arg_WILL_FAIL)
                 set_tests_properties(${test_name}_API_${api_ver} PROPERTIES WILL_FAIL 1)
@@ -65,7 +71,7 @@ function(abc_add_test arg_TARGET)
     else()
         add_test(NAME ${test_name}
                 COMMAND avm ${avm_arguments}
-                WORKING_DIRECTORY ${AS3_BASEDIR})
+                WORKING_DIRECTORY ${working_directory})
         if (arg_WILL_FAIL)
             set_tests_properties(${test_name} PROPERTIES WILL_FAIL 1)
         endif()
