@@ -14,10 +14,6 @@ include(as3_add_test.cmake)
 include(abs_add_test.cmake)
 include(find_tests.cmake)
 
-as3_set_arguments(ecma3/JSON/AS3Types.as ASC_ARGUMENTS -AS3 -optimize -md SHELL)
-as3_set_arguments(ecma3/JSON/Classes.as ASC_ARGUMENTS -AS3 -optimize -md SHELL)
-as3_set_arguments(ecma3/JSON/versioned.as AVM_ARGUMENTS -api SWF_12 ecma3/JSON/versioned_defjson_helper.abc_bin ecma3/JSON/versioned_useoldjson_helper.abc_bin)
-as3_set_arguments(ecma3/Exceptions/exception_011_rt.as WILL_FAIL)
 as3_set_arguments(misc/bug_526662.as USES_SWF_VERSIONS)
 as3_set_arguments(misc/abstract-base-class.as SHELL)
 as3_set_arguments(misc/invalid_opcodes.as SHELL)
@@ -41,7 +37,6 @@ as3_set_arguments(versioning/bugcompat.as TEST_ARGUMENTS versioning/bugcompat_su
 as3_set_arguments(versioning/classes.as API_VERSIONS AIR_1_0 FP_10_0 AIR_1_5 AIR_1_5_1 FP_10_0_32 AIR_1_5_2)
 as3_set_arguments(versioning/globals.as API_VERSIONS AIR_1_0 FP_10_0 AIR_1_5 AIR_1_5_1 FP_10_0_32 AIR_1_5_2)
 
-as3_find_tests(test_ecma3 ecma3/*)
 as3_find_tests(test_misc misc)
 as3_find_tests(test_mmgc mmgc)
 as3_find_tests(test_mops mops)
@@ -52,11 +47,13 @@ as3_find_tests(test_versioning versioning)
 
 add_subdirectory(as3)
 add_subdirectory(e4x)
+add_subdirectory(ecma3)
 add_subdirectory(abcasm)
 add_subdirectory(spidermonkey)
 
 add_dependencies(test_acceptance
         test_as3
         test_e4x
+        test_ecma3
         test_abcasm
         test_spidermonkey)
