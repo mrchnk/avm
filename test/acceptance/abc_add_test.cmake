@@ -1,4 +1,4 @@
-function(abs_add_test arg_TARGET)
+function(abc_add_test arg_TARGET)
     set(options FLOAT GREEDY USES_SWF_VERSIONS WILL_FAIL DISABLED)
     set(oneValueArgs PASS_REGULAR_EXPRESSION)
     set(multiValueArgs AVM_ARGUMENTS SWF_VERSIONS API_VERSIONS TEST_ARGUMENTS DEPENDS)
@@ -18,14 +18,6 @@ function(abs_add_test arg_TARGET)
         string(REPLACE "/" "_" test_name "${AS3_PREFIX}_${dir}_${name}")
     endif()
 
-    if (AS3_HASH_TARGET)
-        string(SHA1 target_name ${test_name})
-        string(SUBSTRING ${target_name} 0 8 target_name)
-        set(target_name "${AS3_PREFIX}__${target_name}")
-    else()
-        set(target_name ${test_name})
-    endif()
-
     if (arg_FLOAT)
         set(arg_DISABLED 1)
     endif()
@@ -34,25 +26,7 @@ function(abs_add_test arg_TARGET)
         set(arg_SWF_VERSIONS 9 10 11 12 13 14 15 16 17 18)
     endif()
 
-    add_custom_target(${target_name}
-            COMMAND ${ABCASM} -input ${arg_TARGET} -o ${dir}
-            COMMENT Building ${arg_TARGET} for test ${test_name}
-            WORKING_DIRECTORY ${AS3_BASEDIR}
-            SOURCES ${arg_TARGET})
-
-    if (arg_DEPENDS)
-        add_dependencies(${target_name} ${arg_DEPENDS})
-    endif()
-
-    if (AS3_DEPENDS)
-        add_dependencies(${target_name} ${AS3_DEPENDS})
-    endif()
-
-    if (NOT arg_DISABLED)
-        add_dependencies(${AS3_TARGET} ${target_name})
-    endif()
-
-    set(avm_arguments ${arg_AVM_ARGUMENTS} ${dir}/${name}.abc)
+    set(avm_arguments ${arg_AVM_ARGUMENTS} ${arg_TARGET})
     if (arg_TEST_ARGUMENTS)
         list(APPEND avm_arguments "--" ${arg_TEST_ARGUMENTS})
     endif()
@@ -92,7 +66,6 @@ function(abs_add_test arg_TARGET)
         add_test(NAME ${test_name}
                 COMMAND avm ${avm_arguments}
                 WORKING_DIRECTORY ${AS3_BASEDIR})
-
         if (arg_WILL_FAIL)
             set_tests_properties(${test_name} PROPERTIES WILL_FAIL 1)
         endif()
