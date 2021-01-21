@@ -27,7 +27,6 @@ as3_set_arguments(versioning/bugcompat.as TEST_ARGUMENTS versioning/bugcompat_su
 as3_set_arguments(versioning/classes.as API_VERSIONS AIR_1_0 FP_10_0 AIR_1_5 AIR_1_5_1 FP_10_0_32 AIR_1_5_2)
 as3_set_arguments(versioning/globals.as API_VERSIONS AIR_1_0 FP_10_0 AIR_1_5 AIR_1_5_1 FP_10_0_32 AIR_1_5_2)
 
-as3_find_tests(test_recursion recursion)
 as3_find_tests(test_regress regress)
 as3_find_tests(test_regress regress/security)
 as3_find_tests(test_versioning versioning)
@@ -38,6 +37,7 @@ add_subdirectory(e4x)
 add_subdirectory(misc)
 add_subdirectory(mmgc)
 add_subdirectory(mops)
+add_subdirectory(recursion)
 add_subdirectory(abcasm)
 add_subdirectory(spidermonkey)
 
@@ -48,5 +48,6 @@ add_dependencies(test_acceptance
         test_misc
         test_mmgc
         test_mops
+        test_recursion
         test_abcasm
         test_spidermonkey)
