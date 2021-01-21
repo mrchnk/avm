@@ -16,14 +16,14 @@ var expect = 'PASS';
 //printStatus (summary);
 
 function test1() {}
-function addtestcases() { test1.call(this); }
+function test() { test1.call(this); }
 test.prototype = new test1();
 
-var length = 1024 * 1024 - 1;
-var obj = new addtestcases();
+var length = 512 * 1024 - 1;
+var obj = new test();
 var first = obj;
 for(var i = 0 ; i < length ; i++) {
-  obj.next = new addtestcases();
+  obj.next = new test();
   obj = obj.next;
 }
 
