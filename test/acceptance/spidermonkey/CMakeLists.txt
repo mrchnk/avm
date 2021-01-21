@@ -1,6 +1,3 @@
-add_custom_target(test_spidermonkey)
-
-set(AS3_TARGET test_spidermonkey)
 as3_set_arguments(*.as ASC_ARGUMENTS "")
 
 # Disable tests that cannot be compiled with asc
@@ -18,3 +15,12 @@ as3_find_tests(test_spidermonkey_3 js1_3/*)
 as3_find_tests(test_spidermonkey_4 js1_4/*)
 as3_find_tests(test_spidermonkey_5 js1_5/*)
 as3_find_tests(test_spidermonkey_6 js1_6/*)
+
+add_custom_target(test_spidermonkey)
+add_dependencies(test_spidermonkey
+        test_spidermonkey_1
+        test_spidermonkey_2
+        test_spidermonkey_3
+        test_spidermonkey_4
+        test_spidermonkey_5
+        test_spidermonkey_6)
