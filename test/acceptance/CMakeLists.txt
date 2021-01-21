@@ -14,7 +14,6 @@ include(as3_add_test.cmake)
 include(abs_add_test.cmake)
 include(find_tests.cmake)
 
-as3_set_arguments(mops/*.as ASC_ARGUMENTS -AS3 -optimize -import generated/intrinsics.abc_ AVM_ARGUMENTS generated/intrinsics.abc_)
 as3_set_arguments(regress/bug_515935.as WILL_FAIL)
 as3_set_arguments(regress/security/bug567284.as TEST_ARGUMENTS regress/security/bug567284_support/ SHELL)
 as3_set_arguments(regress/security/bug_441280.as SHELL)
@@ -28,7 +27,6 @@ as3_set_arguments(versioning/bugcompat.as TEST_ARGUMENTS versioning/bugcompat_su
 as3_set_arguments(versioning/classes.as API_VERSIONS AIR_1_0 FP_10_0 AIR_1_5 AIR_1_5_1 FP_10_0_32 AIR_1_5_2)
 as3_set_arguments(versioning/globals.as API_VERSIONS AIR_1_0 FP_10_0 AIR_1_5 AIR_1_5_1 FP_10_0_32 AIR_1_5_2)
 
-as3_find_tests(test_mops mops)
 as3_find_tests(test_recursion recursion)
 as3_find_tests(test_regress regress)
 as3_find_tests(test_regress regress/security)
@@ -39,6 +37,7 @@ add_subdirectory(as3)
 add_subdirectory(e4x)
 add_subdirectory(misc)
 add_subdirectory(mmgc)
+add_subdirectory(mops)
 add_subdirectory(abcasm)
 add_subdirectory(spidermonkey)
 
@@ -48,5 +47,6 @@ add_dependencies(test_acceptance
         test_e4x
         test_misc
         test_mmgc
+        test_mops
         test_abcasm
         test_spidermonkey)
