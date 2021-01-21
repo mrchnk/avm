@@ -1,5 +1,3 @@
-set(AS3_BASEDIR ${CMAKE_CURRENT_LIST_DIR})
-
 as3_set_arguments(bug567284.as TEST_ARGUMENTS bug567284_support/ SHELL)
 as3_set_arguments(bug_441280.as SHELL)
 as3_set_arguments(bug_555059a.abc_ PASS_REGULAR_EXPRESSION "VerifyError: Error #1032"

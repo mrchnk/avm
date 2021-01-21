@@ -1,5 +1,3 @@
-set(AS3_BASEDIR ${CMAKE_CURRENT_LIST_DIR})
-
 as3_ignore(patch_ByteArray_readFile.abc_)
 as3_ignore(printpassed.abc_)
 
