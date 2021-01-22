@@ -4,6 +4,9 @@ add_dependencies(test_acceptance avm)
 set(AS3_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/Assert.as ${CMAKE_CURRENT_LIST_DIR}/Utils.as)
 
 if (CMAKE_GENERATOR MATCHES "Visual Studio")
+    # Visual Studio has restrictions on file path length
+    # It's easy to fall in that restrictions with target names
+    # based on test path
     set(AS3_HASH_TARGET 1)
 endif()
 
