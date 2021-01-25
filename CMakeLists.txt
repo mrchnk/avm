@@ -29,7 +29,9 @@ elseif (${CMAKE_HOST_UNIX})
     target_link_libraries(avm PRIVATE shell Threads::Threads)
 endif ()
 
-add_subdirectory(asc)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
+find_package(ASC)
+
 add_subdirectory(abcasm)
 add_subdirectory(core)
 add_subdirectory(platform)
