@@ -1,7 +1,10 @@
-add_custom_target(test_e4x)
+avm_test(CONFIGURE_RECURSE *.as
+        ASC_ARGUMENTS -AS3 -optimize
+        INCLUDE ${TEST_ASC_INCLUDE}
+        TARGET test_e4x)
 
-as3_set_arguments(XML/e13_4_4_3.as USES_SWF_VERSIONS)
-as3_set_arguments(XML/e13_4_4_29.as USES_SWF_VERSIONS)
-as3_set_arguments(XML/e13_4_4_32.as USES_SWF_VERSIONS)
+avm_test(CONFIGURE XML/e13_4_4_3.as USES_SWF_VERSIONS)
+avm_test(CONFIGURE XML/e13_4_4_29.as USES_SWF_VERSIONS)
+avm_test(CONFIGURE XML/e13_4_4_32.as USES_SWF_VERSIONS)
 
-as3_find_tests(test_e4x *)
+avm_test(ADD */*.as)

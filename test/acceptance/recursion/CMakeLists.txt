@@ -1,1 +1,4 @@
-as3_find_tests(test_recursion ${CMAKE_CURRENT_LIST_DIR})
+avm_test(ADD *.as
+        ASC_ARGUMENTS -AS3 -optimize
+        INCLUDE ${TEST_ASC_INCLUDE}
+        TARGET test_recursion)

@@ -1,14 +1,9 @@
-as3_set_arguments(*.as
+avm_test(RECONFIGURE *.as
         ASC_ARGUMENTS -AS3 -optimize -import support/intrinsics.abc_
-        AVM_ARGUMENTS support/intrinsics.abc_)
+        AVM_ARGUMENTS support/intrinsics.abc_
+        INCLUDE ${TEST_ASC_INCLUDE})
 
-add_test(NAME test_mops_mops
-        COMMAND avm -Dnogc mops.abc_
-        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
+avm_test(ADD *.as TARGET test_mops)
 
-add_custom_target(test_mops_support
-        COMMAND ${ABCASM} -input support/intrinsics.abs -o support
-        WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
-
-as3_find_tests(test_mops ${CMAKE_CURRENT_LIST_DIR})
-#add_dependencies(test_mops test_mops_support)
+avm_add_test(test_mops_mops mops.abc_ AVM_ARGUMENTS -Dnogc)
+abcasm_add_target(test_mops_support support/intrinsics.abs "")

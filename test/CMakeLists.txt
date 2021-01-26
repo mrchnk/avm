@@ -1,3 +1,5 @@
+include(avm_test.cmake)
+
 add_subdirectory(acceptance)
 add_subdirectory(cmdline)
 

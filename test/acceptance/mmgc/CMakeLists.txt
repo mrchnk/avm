@@ -1,7 +1,10 @@
-add_custom_target(test_mmgc)
+avm_test(RECONFIGURE *.as
+        ASC_ARGUMENTS -AS3 -optimize
+        INCLUDE ${TEST_ASC_INCLUDE}
+        TARGET test_mmgc)
 
-as3_set_arguments(memlimit.as AVM_ARGUMENTS -memlimit 10240)
-as3_set_arguments(memstats.as AVM_ARGUMENTS -memstats)
-as3_set_arguments(outofmemory.as AVM_ARGUMENTS -memlimit 1024 WILL_FAIL)
+avm_test(CONFIGURE memlimit.as AVM_ARGUMENTS -memlimit 10240)
+avm_test(CONFIGURE memstats.as AVM_ARGUMENTS -memstats)
+avm_test(CONFIGURE outofmemory.as AVM_ARGUMENTS -memlimit 1024 WILL_FAIL)
 
-as3_find_tests(test_mmgc ${CMAKE_CURRENT_LIST_DIR})
+avm_test(ADD *.as)

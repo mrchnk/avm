@@ -1,19 +1,13 @@
 add_custom_target(test_acceptance)
-add_dependencies(test_acceptance avm)
-
-set(AS3_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/Assert.as ${CMAKE_CURRENT_LIST_DIR}/Utils.as)
 
 if (CMAKE_GENERATOR MATCHES "Visual Studio")
     # Visual Studio has restrictions on file path length
     # It's easy to fall in that restrictions with target names
     # based on test path
-    set(AS3_HASH_TARGET 1)
+    set(AVM_TEST_HASH_TARGET 1)
 endif()
 
-include(as3_add_test.cmake)
-include(abs_add_test.cmake)
-include(abc_add_test.cmake)
-include(find_tests.cmake)
+set(TEST_ASC_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/Assert.as ${CMAKE_CURRENT_LIST_DIR}/Utils.as)
 
 add_subdirectory(ecma3)
 add_subdirectory(as3)
