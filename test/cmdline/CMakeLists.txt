@@ -229,7 +229,7 @@ cmdline_add_test(selftest_VMbaseSafepoints
         "\\['test', 'vmbase', 'safepoints', 'nested_producer_consumer'\\]"
         "\\['pass', 'vmbase', 'safepoints', 'nested_producer_consumer'\\]"
         "\\['end', 'vmbase', 'safepoints'\\]"
-        ) # https://bugzilla.mozilla.org/show_bug.cgi?id=754918
+        DISABLED) # https://bugzilla.mozilla.org/show_bug.cgi?id=754918
 
 cmdline_add_test(selftest_VMPIThreads
         AVM_ARGUMENTS -Dselftest=vmpi,threads
