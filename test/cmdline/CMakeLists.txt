@@ -30,8 +30,8 @@ cmdline_test(shell_readline
         INPUT "test input"
         PASS_REGULAR_EXPRESSION "line=test input")
 cmdline_test(shell_exec
-        AVM_ARGUMENTS testdata/exec.abc
-        PASS_REGULAR_EXPRESSION "result=0")
+        AVM_ARGUMENTS testdata/exec.abc -- "exit 10"
+        PASS_REGULAR_EXPRESSION "result=10")
 cmdline_test(shell_argv_0
         AVM_ARGUMENTS testdata/argv.abc --
         PASS_REGULAR_EXPRESSION "argv\\.length=0")
