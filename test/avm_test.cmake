@@ -38,7 +38,11 @@ endfunction()
 function (_get_abc_file out_var file)
     get_filename_component(path ${file} DIRECTORY)
     get_filename_component(name ${file} NAME_WLE)
-    set(${out_var} ${path}/${name}.abc PARENT_SCOPE)
+    if (path)
+        set(${out_var} ${path}/${name}.abc PARENT_SCOPE)
+    else()
+        set(${out_var} ${name}.abc PARENT_SCOPE)
+    endif()
 endfunction()
 
 function (_avm_test_add file)
@@ -103,6 +107,7 @@ endfunction()
 
 function (asc_add_target target_name file abc_var)
     _avm_parse_arguments(${ARGN})
+    get_filename_component(file ${file} ABSOLUTE)
 
     foreach (inc ${arg_INCLUDE})
         _avm_working_path(inc ${inc})
@@ -136,6 +141,7 @@ function (asc_add_target target_name file abc_var)
 
     add_custom_target(${target_name}
             ${commands}
+            VERBATIM
             WORKING_DIRECTORY ${working_directory})
 
     _avm_add_dependencies()
@@ -158,6 +164,7 @@ function (abcasm_add_target target_name file abc_var)
 
     add_custom_target(${target_name}
             COMMAND ${ABCASM} -input ${target} -o ${output_directory}
+            VERBATIM
             WORKING_DIRECTORY ${working_directory})
 
     _avm_add_dependencies()
