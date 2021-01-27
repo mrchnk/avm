@@ -49,4 +49,5 @@ add_subdirectory(other-licenses/zlib)
 add_subdirectory(nanojit)
 
 enable_testing()
+include(CTest)
 add_subdirectory(test)
