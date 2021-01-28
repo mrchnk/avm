@@ -1,3 +1,4 @@
+var NAME:String='Moldyn untyped';
 var ITERS = 100;
 
     var LENGTH = 50e-10;
@@ -560,5 +561,5 @@ class particle {
         JGFrun(3);
         var elapsed = getTimer() - start;
     }
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
 

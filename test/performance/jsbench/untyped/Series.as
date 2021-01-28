@@ -1,3 +1,4 @@
+var NAME:String='Series untyped';
 var size;
 
                 // Declare class data.
@@ -23,7 +24,7 @@ var size;
         var elapsed = getTimer() - start;
     }
     if (JGFvalidate())
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
     else
         print("validation failed");
   

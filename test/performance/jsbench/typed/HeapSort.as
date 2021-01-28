@@ -1,4 +1,4 @@
-
+var NAME:String='HeapSort typed';
 var array_rows:int;
 var TestArray:Vector.<int>;
 var size:int;
@@ -16,7 +16,7 @@ else { // mobile
     var elapsed = getTimer() - start;
 }
 if (JGFvalidate())
-    print("metric time "+elapsed);
+    REPORT(NAME, 'time', elapsed);
 else
     print("validation failed");
 

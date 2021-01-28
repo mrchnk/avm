@@ -1,3 +1,4 @@
+var NAME:String='Crypt typed';
 var size:int;
 var DEBUG:Boolean=true;
 var datasizes:Vector.<int> = new Vector.<int>(4,true);
@@ -38,7 +39,7 @@ datasizes[3] = 100000;
       var elapsed = getTimer() - start;
   }
   if (JGFvalidate())
-    print("metric time "+elapsed);
+    REPORT(NAME, 'time', elapsed);
   else
     print("validation failed");
   

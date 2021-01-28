@@ -8,7 +8,9 @@ endif()
 asc_add_target(test_performance_support ${report} REPORT_ABC TARGET test_performance)
 add_subdirectory(asmicro)
 add_subdirectory(jsmicro)
+add_subdirectory(jsbench)
 
 add_dependencies(test_performance
         test_performance_asmicro
-        test_performance_jsmicro)
+        test_performance_jsmicro
+        test_performance_jsbench)

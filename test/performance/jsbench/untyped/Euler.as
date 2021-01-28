@@ -1,3 +1,4 @@
+var NAME:String='Euler untyped';
         var size;
         var errorCheck=false;
         var datasizes = new Array(3);
@@ -1611,7 +1612,7 @@ class Vector2 {
         var elapsed = 0;
     }
     if (JGFvalidate())
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
     else
         print("validation failed");
         

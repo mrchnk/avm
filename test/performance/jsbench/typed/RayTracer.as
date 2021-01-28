@@ -1,3 +1,4 @@
+var NAME:String='RayTracer typed';
   //print("sanity check");
   var size;
   //Scene scene;
@@ -77,7 +78,7 @@
       JGFrun(3);
       var elapsed = getTimer() - start;
   }
-  print("metric time "+elapsed);
+  REPORT(NAME, 'time', elapsed);
   function JGFsetsize(sizel):void {
     size = sizel;
   }

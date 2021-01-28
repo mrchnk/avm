@@ -1,3 +1,4 @@
+var NAME:String='Euler typed';
   var size:int;
   var errorCheck:Boolean=false;
   var datasizes:Vector.<int> = new Vector.<int>(3,true);
@@ -1633,7 +1634,7 @@ class Vector2 {
       var elapsed = 0;
   }
       if (JGFvalidate())
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
     else
         print("validation failed");
   

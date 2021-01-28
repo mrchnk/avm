@@ -1,9 +1,9 @@
+var NAME:String='JGFSearchBench';
 var startSearchBench = new JGFSearchBench();
-
 var start=new Date();
 startSearchBench.JGFrun(0);
 var elapsed=new Date()-start;
-print("metric time "+elapsed);
+REPORT(NAME, 'time', elapsed);
         
 class Game {
         static var TRANSIZE = 1050011;

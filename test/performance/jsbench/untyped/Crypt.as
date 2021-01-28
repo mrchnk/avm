@@ -1,3 +1,4 @@
+var NAME:String='Crypt untyped';
         var size;
         var DEBUG=true;
         var datasizes = new Array(4);
@@ -40,7 +41,7 @@
         
         
     if (JGFvalidate())
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
     else
         print("validation failed");
         

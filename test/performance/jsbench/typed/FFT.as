@@ -1,3 +1,4 @@
+var NAME:String='FFT typed';
 var size:int=0;
 var datasizes:Vector.<int> = new Vector.<int>(5);
 datasizes[0] = 524288;
@@ -36,7 +37,7 @@ else { // mobile
     var elapsed = getTimer() - start;
 }
 if (JGFvalidate())
-    print("metric time "+elapsed);
+    REPORT(NAME, 'time', elapsed);
 else
     print("validation failed");
 

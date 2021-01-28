@@ -1,3 +1,4 @@
+var NAME:String='SparseMatmult typed';
 var size:int;
 
 var RANDOM_SEED:int = 10101010;
@@ -47,7 +48,7 @@ else { // mobile
     var elapsed = getTimer() - start;
 }
 if (JGFvalidate())
-    print("metric time "+elapsed);
+    REPORT(NAME, 'time', elapsed);
 else
     print("validation failed");
 

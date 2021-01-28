@@ -1,3 +1,4 @@
+var NAME:String='SOR untyped';
 var size;
 
         var datasizes = new Array(4);
@@ -32,7 +33,7 @@ var size;
         var elapsed = getTimer() - start;
     }
     if (JGFvalidate())
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
     else
         print("validation failed");
     

@@ -1,3 +1,4 @@
+var NAME:String='LUFact untyped';
         var size;
 
         var datasizes = new Array(4);
@@ -31,7 +32,7 @@
         JGFrun(3);
         var elapsed = getTimer() - start;
     }
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
         function abs(d) {
                 return (d >= 0) ? d : -d;
         }

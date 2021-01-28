@@ -1,3 +1,4 @@
+var NAME:String='LUFact typed';
   var size:int;
 
   var datasizes:Vector.<int> = new Vector.<int>(4);
@@ -31,7 +32,7 @@
       JGFrun(3);
       var elapsed = getTimer() - start;
   }
-  print("metric time "+elapsed);
+  REPORT(NAME, 'time', elapsed);
   
   function abs(d:Number):Number {
     return (d >= 0) ? d : -d;

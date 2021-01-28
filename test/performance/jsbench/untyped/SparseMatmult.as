@@ -1,3 +1,4 @@
+var NAME:String='SparseMatmult untyped';
         var size;
 
         var RANDOM_SEED = 10101010;
@@ -47,7 +48,7 @@
         var elapsed = getTimer() - start;
     }
     if (JGFvalidate())
-        print("metric time "+elapsed);
+        REPORT(NAME, 'time', elapsed);
     else
         print("validation failed");
     
