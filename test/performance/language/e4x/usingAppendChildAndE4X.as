@@ -1,6 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+const NAME:String = 'XML appendChild from E4X';
 
 var nodeCount:int = 1000;
 var referenceResult:String = simpleStringConcatenation(nodeCount).toXMLString();
@@ -17,7 +18,7 @@ if (CONFIG::desktop) {
 if (referenceResult != result.toXMLString()) {
     print("ERROR! XML does not match reference");
 } else {
-    print('metric time '+totaltime);
+    REPORT(NAME, 'time', totaltime);
 }
 
 

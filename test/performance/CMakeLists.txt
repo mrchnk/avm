@@ -10,9 +10,11 @@ add_subdirectory(asmicro)
 add_subdirectory(jsmicro)
 add_subdirectory(jsbench)
 add_subdirectory(FPBench)
+add_subdirectory(language)
 
 add_dependencies(test_performance
         test_performance_asmicro
         test_performance_jsmicro
         test_performance_jsbench
-        test_performance_FPBench)
+        test_performance_FPBench
+        test_performance_language)
