@@ -9,8 +9,10 @@ asc_add_target(test_performance_support ${report} REPORT_ABC TARGET test_perform
 add_subdirectory(asmicro)
 add_subdirectory(jsmicro)
 add_subdirectory(jsbench)
+add_subdirectory(FPBench)
 
 add_dependencies(test_performance
         test_performance_asmicro
         test_performance_jsmicro
-        test_performance_jsbench)
+        test_performance_jsbench
+        test_performance_FPBench)
