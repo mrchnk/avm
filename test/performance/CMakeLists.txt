@@ -10,9 +10,11 @@ add_subdirectory(asmicro)
 add_subdirectory(jsmicro)
 add_subdirectory(floating_point)
 add_subdirectory(language)
+add_subdirectory(misc)
 
 add_dependencies(test_performance
         test_performance_asmicro
         test_performance_jsmicro
         test_performance_floating_point
-        test_performance_language)
+        test_performance_language
+        test_performance_misc)

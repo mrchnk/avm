@@ -2,11 +2,8 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
- // --------------------------------------------------------
- //   Name: Headless Boids
- //   Desc: Version of Boids that has no graphic output.  Used for testing the avmplus.
- // --------------------------------------------------------
-
+const NAME:String = 'boids-hack';
+const DESC:String = 'Version of Boids that has no graphic output';
 
 //
 // Vector.as
@@ -558,7 +555,6 @@ class Fish extends Entity
 // Boids.as
 //
 
-
 dynamic class Boids
 {
     function Boids(numFish:Number)
@@ -656,7 +652,6 @@ dynamic class Boids
 // boidbench.as
 //
 
-
 var numFish = 500;
 var boids = new Boids(numFish);
 
@@ -683,5 +678,5 @@ if (CONFIG::desktop)
 else // mobile
     t = getTimer() - t;
 
-print("metric time "+t);
+REPORT(NAME, "time", t);
 

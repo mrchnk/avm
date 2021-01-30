@@ -6,31 +6,29 @@
 
 import flash.utils.ByteArray;
 import avmplus.*;
+include "driver.as";
 
+var NAME = 'loop-backward-bytearray';
 var DESC = "ByteArray backward int sum loop, 2048 elements";
+
+var v: ByteArray = new ByteArray;
+v.endian = "littleEndian"; // Specialized for x86
+v.length = 8192;
+v.position = 0;
+for ( var i:int=0 ; i < 2048 ; i++ )
+    v.writeInt(1);
+
+TEST(main, NAME);
 
 function main()
 {
-    var then:uint = getTimer();
-    var v: ByteArray = new ByteArray;
-
-    v.endian = "littleEndian"; // Specialized for x86
-    v.length = 8192;
-    v.position = 0;
-    for ( var i:int=0 ; i < 2048 ; i++ )
-        v.writeInt(1);
-
-    for ( var outer:int = 0 ; outer < 10000 ; outer++ ) {
-        var sum:int=0;
-        for ( var inner:int = 8192 ; inner > 0 ; ) {
-            inner -= 4;
-            v.position = inner;
-            sum += v.readInt();
-        }
+    var sum:int=0;
+    for ( var inner:int = 8192 ; inner > 0 ; ) {
+        inner -= 4;
+        v.position = inner;
+        sum += v.readInt();
     }
 
     if (sum != 2048)
         throw DESC + ": Unexpected result: " + sum;
-    print((getTimer() - then) + "ms    " + DESC);
 }
-main();

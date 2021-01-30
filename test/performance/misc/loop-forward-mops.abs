@@ -1,53 +1,16 @@
 /* -*- mode: asm -*- */
-
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-        
-        // Forward int sum, 2048 elements
-
-.script_info {
-  init : .function_id(main)
-  traits : {
-    .trait { kind:Trait_Method method: .function_id(setup)  name: setup }
-    .trait { kind:Trait_Method method: .function_id(loop)   name: loop }
-  }
-}
-        
-function main()
-{
-        finddef setup
-        callproperty setup (0)
-        pop
-        
-        // Time stamp - before
-        finddef Date
-        constructprop Date (0)
-        setlocal1
-        
-        finddef loop
-        callproperty loop (0)
-        pop
-
-        // Time stamp - after
-        finddef print
-        finddef Date
-        constructprop Date (0)
-        getlocal1
-        subtract
-        pushstring "ms    MOPS forward int sum loop, 2048 elements"
-        add
-        callpropvoid print (1)
-
-        returnvoid
-}
-
 function setup()
 {
+        getlocal0
+        pushscope
+
         // Construct the memory
-        finddef {flash.utils}::ByteArray
-        constructprop {flash.utils}::ByteArray 0
+        findproperty NEW_BYTEARRAY
+        callproperty NEW_BYTEARRAY 0
         dup
         setlocal1
         pushint 8192
@@ -76,9 +39,8 @@ L2:     label
         setproperty position
 
         // Install the memory
-        finddef {avmplus}::Domain
-        getproperty {avmplus}::Domain
-        getproperty currentDomain
+        findproperty GET_DOMAIN
+        callproperty GET_DOMAIN 0
         getlocal1
         setproperty domainMemory
 
@@ -87,34 +49,20 @@ L2:     label
         
 function loop()
 {
-        // Outer iteration counter
-        // Outer loop from 0 to 10000
-        pushint 0
-        setlocal2
+        getlocal0
+        pushscope
 
-L1:     label
-        getlocal2
-        pushint 10000
-        ifeq L3
-
-        getlocal2
-        increment_i
-        coerce_i
-        setlocal2
-
-        // Inner iteration counter
-        // Inner loop from 0 to 2048
         pushint 0
         setlocal1
 
-        // Dummy sum
+        // check-summ
         pushint 0
         setlocal3
-        
+
 L2:     label
         getlocal1
         pushint 8192
-        ifeq L1
+        ifeq L3
 
         getlocal1
         li32
@@ -144,3 +92,21 @@ L3:     label
 L4:     label
         returnvoid
 }
+
+function main()
+{
+        getlocal0
+        pushscope
+
+        findproperty TEST
+
+        newfunction setup
+        newfunction loop
+        pushstring "loop-forward-mops"
+
+        callpropvoid TEST 3
+
+        returnvoid
+}
+
+script_info{init: main}
