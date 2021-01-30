@@ -8,13 +8,11 @@ endif()
 asc_add_target(test_performance_support ${report} REPORT_ABC TARGET test_performance)
 add_subdirectory(asmicro)
 add_subdirectory(jsmicro)
-add_subdirectory(jsbench)
-add_subdirectory(FPBench)
+add_subdirectory(floating_point)
 add_subdirectory(language)
 
 add_dependencies(test_performance
         test_performance_asmicro
         test_performance_jsmicro
-        test_performance_jsbench
-        test_performance_FPBench
+        test_performance_floating_point
         test_performance_language)
