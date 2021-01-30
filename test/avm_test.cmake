@@ -223,8 +223,8 @@ macro (_avm_test test_name)
             COMMAND avm ${ARGN}
             WORKING_DIRECTORY ${working_directory})
 
-    set_tests_properties(${test_NAME} PROPERTIES
-            LABELS "avm;${arg_LABELS}")
+    set_tests_properties(${test_name} PROPERTIES
+            LABELS "avm_test;${arg_LABELS}")
 
     if (disabled)
         set_tests_properties(${test_name} PROPERTIES DISABLED 1)
