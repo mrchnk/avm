@@ -1,6 +1,7 @@
 avm_test(IGNORE driver.as)
+avm_test(IGNORE abcasm-driver.as)
 
-asc_add_target(test_performance_abcasm-driver abcasm-driver.as ABCASM_DRIVER)
+asc_add_target(test_performance_misc_abcasm-driver abcasm-driver.as ABCASM_DRIVER)
 
 avm_test(ADD *.as
         ASC_ARGUMENTS -AS3 -optimize -config CONFIG::desktop=true
@@ -13,4 +14,4 @@ avm_test(ADD *.abs
         TARGET test_performance_misc
         LABELS performance misc)
 
-add_dependencies(test_performance_misc test_performance_abcasm-driver)
+add_dependencies(test_performance_misc test_performance_misc_abcasm-driver)
