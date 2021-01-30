@@ -7,6 +7,7 @@ add_definitions(-DDEBUGGER)
 add_executable(avm "")
 
 if (${CMAKE_HOST_WIN32})
+    enable_language(ASM_MASM)
     add_definitions(-DWIN32)
     add_definitions(-D_M_X64)
     target_sources(avm
