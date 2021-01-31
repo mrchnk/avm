@@ -1,7 +1,3 @@
-avm_test(RECONFIGURE_RECURSE *.as
-        ASC_ARGUMENTS -ES
-        INCLUDE ${TEST_ASC_INCLUDE} shell.as)
-
 avm_test(CONFIGURE js1_5/Function/regress-364023.as DISABLED) # uses eval
 avm_test(CONFIGURE js1_5/Regress/regress-159334.as DISABLED) # need to replicate without eval
 avm_test(CONFIGURE js1_5/GC/*.as DISABLED) # GC tests for spidermonkey
@@ -32,10 +28,14 @@ avm_test(CONFIGURE js1_5/Regress/regress-511859.as DISABLED) # https://bugzilla.
 avm_test(CONFIGURE js1_6/Array/regress-304828.as DISABLED) # Array methods on String not supported
 avm_test(CONFIGURE js1_6/Array/regress-386030.as DISABLED) # https://bugs.adobe.com/jira/browse/ASL-55
 avm_test(CONFIGURE js1_6/extensions/regress-312385-01.as DISABLED) # uses eval
+avm_test(CONFIGURE js1_5/Regress/regress-31255.as DISABLED) # how should e4x comments behave in as3?, excluding since it will not compile
+avm_test(CONFIGURE js1_5/Regress/regress-352009.as DISABLED) # should array comprehension work?, excluding since it will not compile
+avm_test(CONFIGURE js1_5/Regress/regress-191668.as DISABLED) # should (0 <!-0) be legal? , excluding since it will not compile
 
-avm_test(IGNORE js1_5/Regress/regress-31255.as) # how should e4x comments behave in as3?, excluding since it will not compile
-avm_test(IGNORE js1_5/Regress/regress-352009.as) # should array comprehension work?, excluding since it will not compile
-avm_test(IGNORE js1_5/Regress/regress-191668.as) # should (0 <!-0) be legal? , excluding since it will not compile
 avm_test(IGNORE shell.as)
 
-avm_test(ADD_RECURSE *.as TARGET test_spidermonkey)
+avm_test(ADD_RECURSE *.as
+        ASC_ARGUMENTS -ES
+        INCLUDE ${ASSERT_SRC} shell.as
+        TARGET test_spidermonkey
+        LABELS acceptance spidermonkey)

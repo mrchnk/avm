@@ -104,18 +104,6 @@ function prepareByteArrayWithTextDeterministically(length : uint) : ByteArray
     return byteArrayWithText;
 }
 
-function prepareByteArrayWithSizeAndData(testDataFilePath : String) : ByteArray
-{
-    var pathToTestData : String = testDataFilePath;
-    
-    if (System.argv.length > 0)
-    {
-        pathToTestData = System.argv[0] + '/' + pathToTestData;
-    }
-    
-    return File.readByteArray(pathToTestData);
-}
-
 function TEST_TIME(run:Function, tag:String, iterations:uint = 1) 
 {
     var start:uint = getTimer()

@@ -3,7 +3,6 @@ avm_test(IGNORE String/timetest.as)
 avm_test(IGNORE String/ascii.as)
 avm_test(IGNORE String/latin1.as)
 
-avm_test(CONFIGURE ByteArray/*.as TEST_ARGUMENTS ByteArray)
 avm_test(ADD_RECURSE *.as
         TARGET test_performance_language
         LABELS performance language

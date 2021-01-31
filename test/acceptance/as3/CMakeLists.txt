@@ -1,33 +1,56 @@
-avm_test(RECONFIGURE_RECURSE *.as ASC_ARGUMENTS -AS3 -optimize)
-avm_test(RECONFIGURE DescribeType/*.as ASC_ARGUMENTS -AS3 -optimize -md)
-avm_test(RECONFIGURE sampling/*.as ASC_ARGUMENTS -AS3 SHELL)
-avm_test(RECONFIGURE ShellClasses/*.as ASC_ARGUMENTS -AS3 SHELL)
-avm_test(RECONFIGURE Workers/*.as ASC_ARGUMENTS -AS3 SHELL)
+add_custom_target(test_as3)
 
-avm_test(CONFIGURE_RECURSE *.as INCLUDE ${TEST_ASC_INCLUDE} TARGET test_as3)
-avm_test(CONFIGURE Types/Float/*.as FLOAT)
-avm_test(CONFIGURE Types/Float/nostrict/*.as FLOAT)
-avm_test(CONFIGURE Types/Float4/*.as FLOAT)
-avm_test(CONFIGURE Types/Float4/nostrict/*.as FLOAT)
-avm_test(CONFIGURE AMF/AMFSerializer_float.as FLOAT)
+add_subdirectory(AbcDecoder)
+add_subdirectory(AMF)
+add_subdirectory(Array)
+add_subdirectory(ByteArray)
+add_subdirectory(Definitions)
+add_subdirectory(DescribeType)
+add_subdirectory(Directives)
+add_subdirectory(ErrorObject)
+add_subdirectory(Expressions)
+add_subdirectory(Float)
+add_subdirectory(Float4)
+add_subdirectory(GlobalObject)
+add_subdirectory(Int)
+add_subdirectory(Math)
+add_subdirectory(MethodClosures)
+add_subdirectory(Proxy)
+add_subdirectory(RegExp)
+add_subdirectory(RuntimeErrors)
+add_subdirectory(sampling)
+add_subdirectory(ShellClasses)
+add_subdirectory(Statements)
+add_subdirectory(String)
+add_subdirectory(TypeConversion)
+add_subdirectory(UInt)
+add_subdirectory(Vector)
+add_subdirectory(Workers)
 
-avm_test(CONFIGURE Array/regress_524122.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE ByteArray/*.as SHELL WORKING_DIRECTORY ByteArray)
-avm_test(CONFIGURE GlobalObject/parseFloat_513018.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE Expressions/logicalAssignment2.as SHELL)
-avm_test(CONFIGURE RuntimeErrors/Error1115NotAConstructor.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE String/localeCompare_585791.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE Types/Number/e15_7_4_6_1.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE Types/Number/visibility.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE Vector/bug504525/bug504525.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE Vector/nonindexproperty.as USES_SWF_VERSIONS)
-avm_test(CONFIGURE Vector/vectorIndexRangeExceptions.as USES_SWF_VERSIONS)
-
-avm_test(ADD */*.as)
-avm_test(ADD Definitions/Classes/*/*.as)
-avm_test(ADD Definitions/*/*.as)
-avm_test(ADD Expressions/*/*.as)
-avm_test(ADD Statements/*/*.as)
-avm_test(ADD Types/*/*.as)
-avm_test(ADD Vector/bug504525/*.as)
-avm_test(ADD Workers/regress/*.as)
+add_dependencies(test_as3
+        test_as3_AbcDecoder
+        test_as3_AMF
+        test_as3_Array
+        test_as3_ByteArray
+        test_as3_Definitions
+        test_as3_DescribeType
+        test_as3_Directives
+        test_as3_ErrorObject
+        test_as3_Expressions
+        test_as3_Float
+        test_as3_Float4
+        test_as3_GlobalObject
+        test_as3_Int
+        test_as3_Math
+        test_as3_MethodClosures
+        test_as3_Proxy
+        test_as3_RegExp
+        test_as3_RuntimeErrors
+        test_as3_sampling
+        test_as3_ShellClasses
+        test_as3_Statements
+        test_as3_String
+        test_as3_TypeConversion
+        test_as3_UInt
+        test_as3_Vector
+        test_as3_Workers)

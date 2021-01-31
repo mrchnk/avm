@@ -7,7 +7,7 @@ if (CMAKE_GENERATOR MATCHES "Visual Studio")
     set(AVM_TEST_HASH_TARGET 1)
 endif()
 
-set(TEST_ASC_INCLUDE ${CMAKE_CURRENT_LIST_DIR}/Assert.as ${CMAKE_CURRENT_LIST_DIR}/Utils.as)
+set(ASSERT_SRC ${CMAKE_CURRENT_LIST_DIR}/Assert.as ${CMAKE_CURRENT_LIST_DIR}/Utils.as)
 
 add_subdirectory(ecma3)
 add_subdirectory(as3)

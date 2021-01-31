@@ -11,10 +11,6 @@
  * opcodes that don't have any operands in the ABC stream or any
  * explicit control flow.  Its easier to write test cases that call
  * these functions than to handwrite abcasm.
- *
- * COMPILE:
- *     >$ ../../../utils/abcasm/abcasm.sh intrinsics.abs
- *     >$ mv intrinsics.abc intrinsics.abc_
  */
 
 // script initializer

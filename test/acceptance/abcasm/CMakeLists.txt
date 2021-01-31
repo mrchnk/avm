@@ -1,6 +1,10 @@
-avm_test(RECONFIGURE_RECURSE *.abs AVM_ARGUMENTS abs_helper.abc)
-avm_test(RECONFIGURE bug_554915a.abs AVM_ARGUMENTS -Dtimeout abs_helper.abc PASS_REGULAR_EXPRESSION "Error: Error #1502")
-avm_test(RECONFIGURE bug_554915b.abs AVM_ARGUMENTS -Dtimeout abs_helper.abc)
+asc_add_target(test_abcasm_helper helper.as HELPER_ABC)
+
+avm_test(RECONFIGURE_RECURSE *.abs AVM_ARGUMENTS ${HELPER_ABC})
+avm_test(RECONFIGURE bug_554915a.abs AVM_ARGUMENTS -Dtimeout ${HELPER_ABC} PASS_REGULAR_EXPRESSION "Error: Error #1502")
+avm_test(RECONFIGURE bug_554915b.abs AVM_ARGUMENTS -Dtimeout ${HELPER_ABC})
+avm_test(RECONFIGURE bug_612641.abs AVM_ARGUMENTS -Djitordie ${HELPER_ABC})
+avm_test(RECONFIGURE bug_678952.abs AVM_ARGUMENTS -Ojit ${HELPER_ABC} USES_SWF_VERSIONS)
 
 avm_test(CONFIGURE coverage/float/*.abs FLOAT)
 avm_test(CONFIGURE float/*.abs FLOAT)
@@ -12,7 +16,6 @@ avm_test(CONFIGURE funcRedef.abs PASS_REGULAR_EXPRESSION "VerifyError: Error #11
 avm_test(CONFIGURE semanticErrorDuplicateSlotName.abs PASS_REGULAR_EXPRESSION "VerifyError: Error #1107")
 avm_test(CONFIGURE traitsSparseSlots.abs PASS_REGULAR_EXPRESSION "VerifyError: Error #1107")
 
-#
 avm_test(CONFIGURE nullCheck/CallStatic.abs DISABLED) # http://watsonexp.corp.adobe.com/#bug=3328170
 avm_test(CONFIGURE nullCheck/E.abs DISABLED) # http://watsonexp.corp.adobe.com/#bug=3328170
 avm_test(CONFIGURE mops.abs DISABLED) # per compiler dev team no longer support for property names beyond simple qnames e.g. {flash.utils}::ByteArray
@@ -26,17 +29,13 @@ avm_test(CONFIGURE bug_555006a.abs DISABLED) # NEEDS INVESTIGATION: When run thi
 avm_test(CONFIGURE bug_678952.abs DISABLED) # per compiler dev team no longer support for property names beyond simple qnames
 avm_test(CONFIGURE nullCheck/H.abs DISABLED) # TEST OBSOLETE per spec no longer supporting hasnext, hasnext2 instruction
 avm_test(CONFIGURE coverage/H.abs DISABLED) # TEST OBSOLETE per spec no longer supporting hasnext, hasnext2 instruction
-avm_test(CONFIGURE syntaxErrors.abs DISABLED) # INVESTIGATE if worth porting test is disordered and incoherent
 
 # Disable tests that cannot be compiled with abcasm
 avm_test(CONFIGURE adhoc.abs DISABLED)
 avm_test(CONFIGURE bug_554915b.abs DISABLED)
 
-avm_test(ADD *.abs TARGET test_abcasm)
-avm_test(ADD coverage/*.abs TARGET test_abcasm)
-avm_test(ADD coverage/float/*.abs TARGET test_abcasm)
-avm_test(ADD nullCheck/*.abs TARGET test_abcasm)
+avm_test(ADD_RECURSE *.abs
+        TARGET test_abcasm
+        LABELS acceptance abcasm)
 
-asc_add_target(test_abcasm_support abs_helper.as "")
-
-add_dependencies(test_abcasm test_abcasm_support)
+add_dependencies(test_abcasm test_abcasm_helper)
