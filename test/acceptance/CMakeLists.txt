@@ -19,6 +19,7 @@ add_subdirectory(recursion)
 add_subdirectory(regress)
 add_subdirectory(versioning)
 add_subdirectory(abcasm)
+add_subdirectory(asc)
 add_subdirectory(spidermonkey)
 
 add_dependencies(test_acceptance
@@ -32,4 +33,5 @@ add_dependencies(test_acceptance
         test_regress
         test_versioning
         test_abcasm
+        test_asc
         test_spidermonkey)

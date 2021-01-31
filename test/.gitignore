@@ -1,1 +1,2 @@
 *.abc
+!*.precompiled.abc
