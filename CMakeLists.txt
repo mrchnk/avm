@@ -32,8 +32,8 @@ endif ()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 find_package(ASC)
+find_package(ABCASM)
 
-add_subdirectory(abcasm)
 add_subdirectory(core)
 add_subdirectory(platform)
 add_subdirectory(extensions)
