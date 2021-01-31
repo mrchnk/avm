@@ -45,6 +45,6 @@ package
     for ( var i=0 ; i < iters ; i++ )
                 res[i%20] = fib(20, null);
     var now = new Date();
-    print("metric time " + (now - then));
+    REPORT('ofib', 'time', now - then);
 }
 

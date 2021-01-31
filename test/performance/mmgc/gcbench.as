@@ -81,7 +81,7 @@ class GCBench
 
         tFinish = now();
         tElapsed = tFinish-tStart;
-        trace("metric time "+tElapsed);
+        REPORT('gcbench', 'time', tElapsed);
 
     }
 
