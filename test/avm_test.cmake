@@ -99,6 +99,15 @@ function (avm_add_test test_name abcs)
         foreach(api_ver ${arg_API_VERSIONS})
             _avm_test(${test_name}_API_${api_ver} -api ${api_ver} ${avm_arguments})
         endforeach()
+    elseif(arg_NORMAL_JIT_INTERP)
+        foreach(mode "" -Ojit -Dinterp)
+            if (mode)
+                set(modename ${mode})
+            else()
+                set(modename normal)
+            endif()
+            _avm_test(${test_name}_MODE_${modename} ${mode} ${avm_arguments})
+        endforeach()
     else()
         _avm_test(${test_name} ${avm_arguments})
     endif()
@@ -174,7 +183,7 @@ endfunction()
 macro (_avm_parse_arguments)
     cmake_parse_arguments(arg
             # options
-            "DISABLED;FLOAT;SHELL;GREEDY;WILL_FAIL;USES_SWF_VERSIONS"
+            "DISABLED;FLOAT;SHELL;GREEDY;WILL_FAIL;USES_SWF_VERSIONS;NORMAL_JIT_INTERP"
             # one_value_keywords
             "PASS_RETURN_CODE;PASS_REGULAR_EXPRESSION;WORKING_DIRECTORY;TARGET"
             # multi_value_keywords
