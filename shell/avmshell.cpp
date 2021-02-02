@@ -726,7 +726,7 @@ namespace avmshell
                     commandLine[kMaxCommandLine-1] = 0;
                     if (VMPI_strncmp(commandLine, ".end", 4) == 0)
                         break;
-                    input->appendLatin1(commandLine);
+                    input = input->appendLatin1(commandLine);
                 }
                 goto compute;
             }
