@@ -59,13 +59,8 @@ namespace avmshell
         if (!command) {
             toplevel()->throwArgumentError(kNullArgumentError, "command");
         }
-        #ifdef UNDER_CE
-        AvmAssert(0);
-        return 0;
-        #else
         avmplus::StUTF8String commandUTF8(command);
-        return system(commandUTF8.c_str());
-        #endif
+        return Platform::GetInstance()->exec(commandUTF8.c_str());
     }
 
     avmplus::Stringp SystemClass::getAvmplusVersion()

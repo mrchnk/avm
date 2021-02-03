@@ -18,6 +18,8 @@ namespace avmshell
 
         virtual void exit(int code);
 
+        int exec(const char* command) override;
+
         virtual File* createFile();
         virtual void destroyFile(File* file);
 

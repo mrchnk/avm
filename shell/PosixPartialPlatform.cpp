@@ -14,6 +14,15 @@ namespace avmshell
         ::exit(code);
     }
 
+    int PosixPartialPlatform::exec(const char *command) {
+        int status = std::system(command);
+        if (WIFEXITED(status)) {
+            return WEXITSTATUS(status);
+        } else {
+            return -1;
+        }
+    }
+
     File* PosixPartialPlatform::createFile()
     {
         return mmfx_new( PosixFile() );

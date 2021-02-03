@@ -47,6 +47,13 @@ namespace avmshell
         virtual void exit(int code) = 0;
 
         /**
+         * Execute command in the command processor or the terminal
+         * @param command command to execute null-terminated utf-8 string
+         * @return process exit code or -1 if was not able to execute
+         */
+        virtual int exec(const char* command) = 0;
+
+        /**
         * Method to create a file handle to execute file I/O
         * The implementation should create a platform specific file instance
         * @return a handle to platform-specific file instance, NULL if an error occurred

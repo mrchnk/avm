@@ -34,7 +34,10 @@ namespace avmshell
             // Restore default timer accuracy
             timeEndPeriod(1);
         }
+
         virtual void exit(int code);
+
+        int exec(const char *command) override;
 
         virtual File* createFile();
         virtual void destroyFile(File* file);
@@ -68,6 +71,10 @@ namespace avmshell
     void WinPlatform::exit(int code)
     {
         ::exit(code);
+    }
+
+    int WinPlatform::exec(const char *command) {
+        return std::system(command);
     }
 
     File* WinPlatform::createFile()
