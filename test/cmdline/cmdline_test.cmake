@@ -12,6 +12,8 @@ function(cmdline_test name)
             -P cmdline_test_run.cmake
             WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR})
 
+    set_tests_properties(test_cmdline_${name} PROPERTIES LABELS "avm_test;cmdline")
+
     if (arg_DISABLED)
         set_tests_properties(test_cmdline_${name} PROPERTIES DISABLED 1)
     endif()
