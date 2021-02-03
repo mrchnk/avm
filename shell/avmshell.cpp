@@ -709,6 +709,7 @@ namespace avmshell
                 const char* s = commandLine+5;
                 while (*s == ' ' || *s == '\t')
                     s++;
+
                 // wrong, handles only source code
                 //readFileForEval(NULL, newStringLatin1(s));
                 // FIXME: implement .load
@@ -724,8 +725,15 @@ namespace avmshell
                     if(Platform::GetInstance()->getUserInput(commandLine, kMaxCommandLine) == NULL)
                         return;
                     commandLine[kMaxCommandLine-1] = 0;
+
                     if (VMPI_strncmp(commandLine, ".end", 4) == 0)
                         break;
+
+                    if (VMPI_strncmp(commandLine, ".time", 5) == 0) {
+                        record_time = true;
+                        break;
+                    }
+
                     input = input->appendLatin1(commandLine);
                 }
                 goto compute;
