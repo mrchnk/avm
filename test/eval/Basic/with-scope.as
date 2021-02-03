@@ -1,0 +1,13 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+function F() {
+    var a = 1;
+    with ({a: 2}) {
+        function f() { return a }
+    }
+    return f();
+}
+
+print(F());
