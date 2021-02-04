@@ -6,12 +6,11 @@ asc_add_target(test_performance_misc_abcasm-driver abcasm-driver.as ABCASM_DRIVE
 avm_test(ADD *.as
         ASC_ARGUMENTS -AS3 -optimize -config CONFIG::desktop=true
         AVM_ARGUMENTS ${REPORT_ABC}
-        TARGET test_performance_misc
         LABELS performance misc)
 
 avm_test(ADD *.abs
         AVM_ARGUMENTS ${REPORT_ABC} ${ABCASM_DRIVER}
-        TARGET test_performance_misc
         LABELS performance misc)
 
+avm_test_target(test_performance_misc)
 add_dependencies(test_performance_misc test_performance_misc_abcasm-driver)

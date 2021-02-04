@@ -1,4 +1,3 @@
-
 function(cmdline_test name)
     cmake_parse_arguments(arg "DISABLED" "PASS_RETURN_CODE" "AVM_ARGUMENTS;INPUT;PASS_REGULAR_EXPRESSION" ${ARGN})
     add_test(NAME test_cmdline_${name}
