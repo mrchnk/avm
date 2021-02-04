@@ -176,7 +176,7 @@ namespace avmshell
 #ifdef VMCFG_WORKERTHREADS
         static void multiWorker(ShellSettings& settings);
 #endif
-        static void repl(ShellCore* shellCore);
+        static void repl(ShellCoreSettings &settings, ShellCore *core);
         static void initializeLogging(const char* basename);
         void parseCommandLine(int argc, char* argv[]);
         static void usage();

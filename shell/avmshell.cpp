@@ -328,7 +328,7 @@ namespace avmshell
 
 #ifdef VMCFG_EVAL
         if (settings.do_repl)
-                Shell::repl(shell);
+            Shell::repl(settings, shell);
 #endif
 		aggregate->requestAggregateExit();
         aggregate->beforeCoreDeletion(this);
@@ -675,7 +675,7 @@ namespace avmshell
 #ifdef VMCFG_EVAL
 
     /* static */
-    void Shell::repl(ShellCore* shellCore)
+    void Shell::repl(ShellCoreSettings &settings, ShellCore *core)
     {
         const int kMaxCommandLine = 1024;
         char commandLine[kMaxCommandLine];
@@ -706,21 +706,26 @@ namespace avmshell
             }
 
             if (VMPI_strncmp(commandLine, ".load", 5) == 0) {
-                const char* s = commandLine+5;
-                while (*s == ' ' || *s == '\t')
-                    s++;
+                char filename[kMaxCommandLine];
+                int begin = 5;
+                while (commandLine[begin] == ' ' || commandLine[begin] == '\t') {
+                    begin++;
+                }
+                for (int i = begin; i < kMaxCommandLine; i++) {
+                    char c = commandLine[i];
+                    if (c == '\n' || c == 0) {
+                        filename[i - begin] = 0;
+                        break;
+                    }
+                    filename[i - begin] = c;
+                }
 
-                // wrong, handles only source code
-                //readFileForEval(NULL, newStringLatin1(s));
-                // FIXME: implement .load
-                // Small amount of generalization of the code currently in the main loop should
-                // take care of it.
-                avmplus::AvmLog("The .load command is not implemented\n");
+                core->evaluateFile(settings, filename);
                 continue;
             }
 
             if (VMPI_strncmp(commandLine, ".input", 6) == 0) {
-                input = shellCore->newStringLatin1("");
+                input = core->newStringLatin1("");
                 for (;;) {
                     if(Platform::GetInstance()->getUserInput(commandLine, kMaxCommandLine) == NULL)
                         return;
@@ -745,14 +750,14 @@ namespace avmshell
 
             if (VMPI_strncmp(commandLine, ".time", 5) == 0) {
                 record_time = true;
-                input = shellCore->newStringLatin1(commandLine+5);
+                input = core->newStringLatin1(commandLine + 5);
                 goto compute;
             }
 
-            input = shellCore->newStringLatin1(commandLine);
+            input = core->newStringLatin1(commandLine);
 
         compute:
-            shellCore->evaluateString(input, record_time);
+            core->evaluateString(input, record_time);
         }
     }
 
