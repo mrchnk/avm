@@ -4,7 +4,7 @@ avm_test(CONFIGURE float-*.as FLOAT)
 avm_test(CONFIGURE float4-*.as FLOAT)
 avm_test(IGNORE driver.as)
 
-avm_test(CONFIGURE *.as AVM_ARGUMENTS ${REPORT_ABC})
 avm_test(ADD *.as
+        AVM_ARGUMENTS ${REPORT_ABC}
         TARGET test_performance_asmicro
         LABELS performance asmicro)
