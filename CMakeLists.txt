@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.14)
 project(avm)
 
+enable_testing()
+include(CTest)
+include(GoogleTest)
+add_subdirectory(third_party/gtest)
+
 set(CMAKE_CXX_STANDARD 11)
 add_definitions(-DAVMSHELL_BUILD)
 add_definitions(-DDEBUGGER)
@@ -49,6 +54,4 @@ add_subdirectory(other-licenses/lzma)
 add_subdirectory(other-licenses/zlib)
 add_subdirectory(nanojit)
 
-enable_testing()
-include(CTest)
 add_subdirectory(test)

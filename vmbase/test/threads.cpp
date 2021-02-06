@@ -331,55 +331,55 @@ using namespace threadtests;
 #define THREAD_QTY 4
 #define ITERATIONS 100000
 
-TEST(VMPIThreads, Mutex) {
+TEST(threads, Mutex) {
     MutexTest mutexTest(THREAD_QTY, ITERATIONS);
     mutexTest.runTest();
     ASSERT_EQ(THREAD_QTY * ITERATIONS, mutexTest.sharedCounter);
 }
 
-TEST(VMPIThreads, Condition) {
+TEST(threads, Condition) {
     ConditionTest conditionTest(THREAD_QTY, ITERATIONS);
     conditionTest.runTest();
     ASSERT_EQ(THREAD_QTY * ITERATIONS, conditionTest.sharedCounter);
 }
 
-TEST(VMPIThreads, AtomicIncrement) {
+TEST(threads, AtomicIncrement) {
     AtomicIncrementTest atomicIncrementTest(THREAD_QTY, ITERATIONS, false);
     atomicIncrementTest.runTest();
     ASSERT_EQ(THREAD_QTY * ITERATIONS, atomicIncrementTest.sharedCounter);
 }
 
-TEST(VMPIThreads, AtomicDecrement) {
+TEST(threads, AtomicDecrement) {
     AtomicDecrementTest atomicDecrementTest(THREAD_QTY, ITERATIONS, false);
     atomicDecrementTest.runTest();
     ASSERT_EQ(-(THREAD_QTY * ITERATIONS), atomicDecrementTest.sharedCounter);
 }
 
-TEST(VMPIThreads, CAS) {
+TEST(threads, CAS) {
     CASTest casTest(THREAD_QTY, ITERATIONS, false);
     casTest.runTest();
     ASSERT_EQ(THREAD_QTY * ITERATIONS, casTest.sharedCounter);
 }
 
-TEST(VMPIThreads, AtomicIncrement2) {
+TEST(threads, AtomicIncrement2) {
     AtomicIncrementTest atomicIncrementTest(THREAD_QTY, ITERATIONS, true);
     atomicIncrementTest.runTest();
     ASSERT_EQ(THREAD_QTY * ITERATIONS, atomicIncrementTest.sharedCounter);
 }
 
-TEST(VMPIThreads, AtomicDecrement2) {
+TEST(threads, AtomicDecrement2) {
     AtomicDecrementTest atomicDecrementTest(THREAD_QTY, ITERATIONS, true);
     atomicDecrementTest.runTest();
     ASSERT_EQ(-(THREAD_QTY * ITERATIONS), atomicDecrementTest.sharedCounter);
 }
 
-TEST(VMPIThreads, CAS2) {
+TEST(threads, CAS2) {
     CASTest casTest(THREAD_QTY, ITERATIONS, true);
     casTest.runTest();
     ASSERT_EQ(THREAD_QTY * ITERATIONS, casTest.sharedCounter);
 }
 
-TEST(VMPIThreads, MemoryBarrier) {
+TEST(threads, MemoryBarrier) {
 #if 0
     /* This test is failing on Windows and Mac OSX 10.4.
      * For Windows, see bug 609820.
@@ -395,34 +395,34 @@ TEST(VMPIThreads, MemoryBarrier) {
 #endif
 }
 
-TEST(VMPIThreads, TryLock) {
+TEST(threads, TryLock) {
     TryLockTest tryLockTest(THREAD_QTY, ITERATIONS);
     tryLockTest.runTest();
     ASSERT_EQ(THREAD_QTY * ITERATIONS, tryLockTest.sharedCounter);
 }
 
-TEST(VMPIThreads, ConditionWithWait) {
+TEST(threads, ConditionWithWait) {
     // Use 2000 iterations with a 1 ms wait
     ConditionWithWaitTest conditionWithWaitTest(THREAD_QTY, 2000);
     conditionWithWaitTest.runTest();
     ASSERT_EQ(THREAD_QTY * 2000, conditionWithWaitTest.sharedCounter);
 }
 
-TEST(VMPIThreads, Sleep) {
+TEST(threads, Sleep) {
     // Use 2000 iterations with a 1 ms sleep
     SleepTest sleepTest(THREAD_QTY, 2000);
     sleepTest.runTest();
     ASSERT_EQ(THREAD_QTY * 2000, sleepTest.sharedCounter);
 }
 
-TEST(VMPIThreads, ThreadCreate) {
+TEST(threads, ThreadCreate) {
     // We can't really test for much here...
     vmpi_thread_t thread;
     bool started = VMPI_threadCreate(&thread, NULL, ThreadTestBase::detachbleThreadEntry, NULL);
     ASSERT_TRUE(started);
 }
 
-TEST(VMPIThreads, ThreadCreate2) {
+TEST(threads, ThreadCreate2) {
     vmpi_thread_attr_t attr;
     ASSERT_TRUE(VMPI_threadAttrInit(&attr));
     

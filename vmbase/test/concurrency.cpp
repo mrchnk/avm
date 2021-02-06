@@ -319,42 +319,42 @@ using namespace concurrencytests;
 #define THREAD_QTY 4
 #define ITERATIONS 100000
 
-TEST(vmbaseConcurrency, Mutex) {
+TEST(concurrency, Mutex) {
     TestRunner runner(THREAD_QTY);
     MutexTest test(ITERATIONS);
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * ITERATIONS, test.sharedCounter);
 }
 
-TEST(vmbaseConcurrency, Condition) {
+TEST(concurrency, Condition) {
     TestRunner runner(THREAD_QTY);
     ConditionTest test(ITERATIONS, THREAD_QTY);
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * ITERATIONS, test.sharedCounter);
 }
 
-TEST(vmbaseConcurrency, AtomicCounter) {
+TEST(concurrency, AtomicCounter) {
     TestRunner runner(THREAD_QTY);
     AtomicCounterTest test(ITERATIONS, THREAD_QTY);
     runner.runTest(test);
     ASSERT_EQ(0, test.sharedCounter);
 }
 
-TEST(vmbaseConcurrency, CAS1) {
+TEST(concurrency, CAS1) {
     TestRunner runner(THREAD_QTY);
     CASTest test(ITERATIONS, false);
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * ITERATIONS, test.sharedCounter);
 }
 
-TEST(vmbaseConcurrency, CAS2) {
+TEST(concurrency, CAS2) {
     TestRunner runner(THREAD_QTY);
     CASTest test(ITERATIONS, true);
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * ITERATIONS, test.sharedCounter);
 }
 
-TEST(vmbaseConcurrency, MemoryBarrier) {
+TEST(concurrency, MemoryBarrier) {
 #if 0
     /* This test is failing on Windows and Mac OSX 10.4.
      * For Windows, see bug 609820.
@@ -371,28 +371,28 @@ TEST(vmbaseConcurrency, MemoryBarrier) {
 #endif
 }
 
-TEST(vmbaseConcurrency, ConditionWithWait) {
+TEST(concurrency, ConditionWithWait) {
     TestRunner runner(THREAD_QTY);
     ConditionWithWaitTest test(2000); // Use 2000 iterations with a 1 ms wait
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * 2000, test.sharedCounter);
 }
 
-TEST(vmbaseConcurrency, Sleep) {
+TEST(concurrency, Sleep) {
     TestRunner runner(THREAD_QTY);
     SleepTest test(2000); // Use 2000 iterations with a 1 ms sleep
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * 2000, test.sharedCounter);
 }
 
-TEST(vmbaseConcurrency, VMThreadLocal) {
+TEST(concurrency, VMThreadLocal) {
     TestRunner runner(THREAD_QTY);
     VMThreadLocalTest test(ITERATIONS);
     runner.runTest(test);
     // ASSERT What?
 }
 
-TEST(vmbaseConcurrency, Mutex2) {
+TEST(concurrency, Mutex2) {
     {
         VMThread vmthread;
     }

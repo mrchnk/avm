@@ -494,21 +494,21 @@ using namespace safepointtests;
 // For NestedProducerConsumerTest
 #define NESTING_DEPTH 7
 
-TEST(VmbaseSafepoints, Simple) {
+TEST(safepoints, Simple) {
     TestRunner runner(THREAD_QTY!=0);
     SimpleTest test(runner.safepointManager(), ITERATIONS, THREAD_QTY);
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * ITERATIONS, test.sharedCounter);
 }
 
-TEST(VmbaseSafepoints, ProducerConsumer) {
+TEST(safepoints, ProducerConsumer) {
     TestRunner runner(THREAD_QTY!=0);
     ProducerConsumerTest test(runner.safepointManager(), ITERATIONS, THREAD_QTY);
     runner.runTest(test);
     ASSERT_EQ(THREAD_QTY * ITERATIONS, test.sharedCounter);
 }
 
-TEST(VmbaseSafepoints, NestedProducerConsumer) {
+TEST(safepoints, NestedProducerConsumer) {
     TestRunner runner(THREAD_QTY!=0);
     NestedProducerConsumerTest test(runner.safepointManager(), ITERATIONS * 100, THREAD_QTY, NESTING_DEPTH);
     runner.runTest(test);
