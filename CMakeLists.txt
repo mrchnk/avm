@@ -1,12 +1,18 @@
 cmake_minimum_required(VERSION 3.14)
 project(avm)
 
+set(CMAKE_CXX_STANDARD 11)
+
 enable_testing()
 include(CTest)
 include(GoogleTest)
+set(BUILD_GMOCK OFF)
+set(INSTALL_GTEST OFF)
+if (${CMAKE_HOST_WIN32})
+    set(gtest_force_shared_crt ON)
+endif()
 add_subdirectory(third_party/gtest)
 
-set(CMAKE_CXX_STANDARD 11)
 add_definitions(-DAVMSHELL_BUILD)
 add_definitions(-DDEBUGGER)
 add_executable(avm "")
