@@ -8,7 +8,20 @@
 #ifndef __avmplus_win32_platform__
 #define __avmplus_win32_platform__
 
-#include <stdarg.h>
+#include <cstdarg>
+#include <cinttypes>
+#include <cstddef>
+#include <cstring>
+#include <cstdio>
+#include <cstdlib>
+#include <cstdarg>
+#include <cmath>
+#include <cctype>
+#include <climits>
+
+#include <memory.h>
+#include <windows.h>
+#include <malloc.h>
 
 #if AVMSYSTEM_WINDOWSSTOREAPP
 // Including thread will cause warning 4265
@@ -117,19 +130,6 @@ int VMPI_vsnprintf(char *s, size_t n, const char *format, va_list args);
 
 #define VMPI_exit           ::exit
 
-#include <stddef.h>
-#include <memory.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <math.h>
-
-#include <ctype.h>
-#include <limits.h>
-
-#include <windows.h>
-#include <malloc.h>
 
 #if defined(UNDER_CE)
 // winmo complains if we try to include <new> and it complains if someone else includes new before us so...
@@ -195,16 +195,6 @@ typedef void *maddr_ptr;
     #include "JITProfiling.h"
   #endif
 #endif
-
-// Windows doesn't support inttypes.h or most C99 types directly
-typedef __int8              int8_t;
-typedef __int16             int16_t;
-typedef __int32             int32_t;
-typedef __int64             int64_t;
-typedef unsigned __int8     uint8_t;
-typedef unsigned __int16    uint16_t;
-typedef unsigned __int32    uint32_t;
-typedef unsigned __int64    uint64_t;
 
 // This must come after all the include files
 #if defined _MSC_VER && !defined DEBUG
