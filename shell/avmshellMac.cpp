@@ -60,14 +60,6 @@ namespace avmshell
     }
 }
 
-avmshell::MacPlatform* gPlatformHandle = NULL;
-
-avmshell::Platform* avmshell::Platform::GetInstance()
-{
-    AvmAssert(gPlatformHandle != NULL);
-    return gPlatformHandle;
-}
-
 int main(int argc, char *argv[])
 {
 #ifdef VMCFG_MACH_EXCEPTIONS
@@ -76,7 +68,7 @@ int main(int argc, char *argv[])
 
     char* dummy;
     avmshell::MacPlatform platformInstance(&dummy);
-    gPlatformHandle = &platformInstance;
+    avmshell::Platform::SetInstance(&platformInstance);
 
     int code = avmshell::Shell::run(argc, argv);
     if (code == avmshell::OUT_OF_MEMORY)

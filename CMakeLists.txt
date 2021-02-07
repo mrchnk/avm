@@ -15,21 +15,15 @@ if (${CMAKE_HOST_WIN32})
     enable_language(ASM_MASM)
     add_definitions(-DWIN32)
     add_definitions(-D_M_X64)
-    target_sources(avm
-            PRIVATE
-            shell/avmshellWin.cpp)
-    target_link_libraries(avm shell)
+    target_sources(avm PRIVATE shell/avmshellWin.cpp)
+    target_link_libraries(avm PRIVATE shell)
 elseif (${CMAKE_HOST_APPLE})
     add_definitions(-D_MAC)
-    target_sources(avm
-            PRIVATE
-            shell/avmshellMac.cpp)
-    target_link_libraries(avm shell)
+    target_sources(avm PRIVATE shell/avmshellMac.cpp)
+    target_link_libraries(avm PRIVATE shell)
 elseif (${CMAKE_HOST_UNIX})
     add_definitions(-DUNIX)
-    target_sources(avm
-            PRIVATE
-            shell/avmshellUnix.cpp)
+    target_sources(avm PRIVATE shell/avmshellUnix.cpp)
     set(THREADS_PREFER_PTHREAD_FLAG ON)
     find_package(Threads REQUIRED)
     target_link_libraries(avm PRIVATE shell Threads::Threads)

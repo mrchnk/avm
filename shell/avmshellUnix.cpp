@@ -62,19 +62,11 @@ namespace avmshell
 
 }
 
-avmshell::UnixPlatform* gPlatformHandle = NULL;
-
-avmshell::Platform* avmshell::Platform::GetInstance()
-{
-    AvmAssert(gPlatformHandle != NULL);
-    return gPlatformHandle;
-}
-
 int main(int argc, char *argv[])
 {
     char* dummy;
     avmshell::UnixPlatform platformInstance(&dummy);
-    gPlatformHandle = &platformInstance;
+    avmshell::Platform::SetInstance(&platformInstance);
 
     int code = avmshell::Shell::run(argc, argv);
     if (code == avmshell::OUT_OF_MEMORY) {

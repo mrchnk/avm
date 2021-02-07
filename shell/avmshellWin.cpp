@@ -10,15 +10,10 @@
 
 #include "avmshell.h"
 #include "WinFile.h"
-#include <Mmsystem.h>
-
-#pragma comment(lib, "Winmm")
 
 namespace avmshell
 {
-#ifdef AVMPLUS_WIN32
-    bool show_error = false;
-#endif
+    bool gShowError = false;
 
     class WinPlatform : public Platform
     {
@@ -49,6 +44,8 @@ namespace avmshell
 
         virtual void setTimer(int seconds, AvmTimerCallback callback, void* callbackData);
         virtual uintptr_t getMainThreadStackLimit();
+
+        void setShowError(bool show_error) override;
     };
 
     struct TimerCallbackInfo
@@ -136,15 +133,17 @@ namespace avmshell
     #if !defined (AVMPLUS_ARM)
 
         #include "dbghelp.h"
+#include "Platform.h"
 
-        unsigned long CrashFilter(LPEXCEPTION_POINTERS pException, int exceptionCode)
+
+    unsigned long CrashFilter(LPEXCEPTION_POINTERS pException, int exceptionCode)
         {
             unsigned long result;
             if ((result = UnhandledExceptionFilter(pException)) != EXCEPTION_EXECUTE_HANDLER)
             {
                 return result;
             }
-            else if (avmshell::show_error)
+            else if (gShowError)
             {
                 // if -error option dont do a dump
                 return EXCEPTION_CONTINUE_SEARCH;
@@ -221,15 +220,11 @@ namespace avmshell
         #endif /* UNDER_CE */
         }
 
+    void WinPlatform::setShowError(bool show_error) {
+        gShowError = show_error;
+    }
+
 } //namespace avmshell
-
-avmshell::WinPlatform* gPlatformHandle = NULL;
-
-avmshell::Platform* avmshell::Platform::GetInstance()
-{
-    AvmAssert(gPlatformHandle != NULL);
-    return gPlatformHandle;
-}
 
 #if !defined (AVMPLUS_ARM)
 
@@ -256,7 +251,7 @@ avmshell::Platform* avmshell::Platform::GetInstance()
         SetErrorMode(SEM_NOGPFAULTERRORBOX);
 
         avmshell::WinPlatform platformInstance;
-        gPlatformHandle = &platformInstance;
+        avmshell::Platform::SetInstance(&platformInstance);
 
         int code = executeShell(argc, argv);
 

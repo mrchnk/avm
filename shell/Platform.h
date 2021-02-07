@@ -26,12 +26,19 @@ namespace avmshell
     class Platform
     {
     public:
+
         /**
         * Method to get access to the platform defined and created singleton
         * Required by the shell to call platform-specific implementations
         * @return Pointer to singleton instance of the platform defined implementation of this base class
         */
         static Platform* GetInstance();
+
+        /**
+         * Initialize platform singleton
+         * @param platform
+         */
+        static void SetInstance(Platform* platform);
 
         /**
         * Virtual Destructor
@@ -123,6 +130,13 @@ namespace avmshell
         * @return none
         */
         virtual void setTimer(int seconds, AvmTimerCallback callback, void* callbackData) = 0;
+
+        /**
+         * Configure platform to show crash dialog instead of dump
+         * Applicable to win32 currently
+         * @param show_error
+         */
+        virtual void setShowError(bool show_error) {}
     };
 }
 

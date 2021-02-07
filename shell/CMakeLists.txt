@@ -3,6 +3,7 @@ add_library(shell "")
 target_sources(shell
         PRIVATE
         avmshell.cpp
+        Platform.cpp
         ConsoleOutputStream.cpp
         DebugCLI.cpp
         DomainClass.cpp
@@ -20,18 +21,15 @@ target_sources(shell
 if (${CMAKE_HOST_WIN32})
     target_sources(shell
             PRIVATE
-            avmshellWin.cpp
             WinFile.cpp)
 elseif (${CMAKE_HOST_APPLE})
     target_sources(shell
             PRIVATE
-            avmshellMac.cpp
             PosixFile.cpp
             PosixPartialPlatform.cpp)
 elseif (${CMAKE_HOST_UNIX})
     target_sources(shell
             PRIVATE
-            avmshellUnix.cpp
             PosixFile.cpp
             PosixPartialPlatform.cpp)
 endif ()

@@ -19,10 +19,6 @@
 
 namespace avmshell
 {
-#ifdef AVMPLUS_WIN32
-    extern bool show_error; // in avmshellWin.cpp
-#endif
-
     ShellSettings::ShellSettings()
         : ShellCoreSettings()
         , programFilename(NULL)
@@ -1103,10 +1099,7 @@ namespace avmshell
 #endif // VMCFG_WORKERTHREADS
 #ifdef AVMPLUS_WIN32
                 else if (!VMPI_strcmp(arg, "-error")) {
-                    show_error = true;
-#ifndef UNDER_CE
-                    SetErrorMode(0);  // set to default
-#endif
+                    Platform::GetInstance()->setShowError(true);
                 }
 #endif // AVMPLUS_WIN32
 #ifdef DEBUGGER
