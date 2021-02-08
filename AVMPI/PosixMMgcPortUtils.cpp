@@ -7,7 +7,7 @@
 //
 // These implementations depend on MMgc (via avmplus.h)
 //
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 #include <sys/mman.h>
 

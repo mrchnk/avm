@@ -15,7 +15,7 @@
 #  include <assert.h>
 #endif
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 #ifdef VMCFG_HALFMOON
 #include "CodegenLIR.h"

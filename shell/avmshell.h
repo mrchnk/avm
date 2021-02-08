@@ -7,7 +7,7 @@
 #ifndef __avmshell__
 #define __avmshell__
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 #include "extensions-tracers.h"
 #include "avmshell-tracers.h"
@@ -88,8 +88,6 @@ namespace avmshell
 #include "FileClass.h"
 #include "DomainClass.h"
 #include "DebugCLI.h"
-#include "DataIO.h"
-#include "DictionaryGlue.h"
 #include "SamplerScript.h"
 #include "ShellCore.h"
 #include "ShellWorkerGlue.h"

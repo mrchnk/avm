@@ -9,13 +9,13 @@
 
 #ifdef AVMPLUS_SAMPLER
  //sampling support
-#include "avmplus.h"
+#include <core/avmplus.h>
 #else
 #define SAMPLE_FRAME(_x, _s)
 #define SAMPLE_CHECK()
 #endif
 
-#include "ITelemetry.h"
+#include <core/ITelemetry.h>
 
 //#define ZCT_TESTING                   // Test the handling of a failure to extend the ZCT
 

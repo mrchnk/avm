@@ -27,7 +27,7 @@
 // the internal (VMCFG_, etc) names rather than feature names.  Eases
 // maintainability.
 
-#include "avmfeatures.h"
+#include <core/avmfeatures.h>
 
 #if AVMSYSTEM_WIN32
   #include "win32/win32-platform.h"

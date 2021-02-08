@@ -43,7 +43,7 @@
 // the internal (VMCFG_, etc) names rather than feature names.  Eases
 // maintainability.
 
-#include "../core/avmfeatures.h"
+#include <core/avmfeatures.h>
 // END TODO: remove dependency of VMPI on the feature system
 /////////
 

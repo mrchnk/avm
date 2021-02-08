@@ -6,7 +6,7 @@
 
 
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 namespace avmplus
 {

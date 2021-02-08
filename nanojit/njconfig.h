@@ -7,7 +7,7 @@
 #ifndef __njconfig_h__
 #define __njconfig_h__
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 // Do not include nanojit.h here; this file should be usable without it.
 

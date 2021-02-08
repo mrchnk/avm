@@ -11,7 +11,7 @@
 #ifndef HM_MAIN_H
 #define HM_MAIN_H
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 #ifdef VMCFG_HALFMOON
 #include "CodegenLIR.h"
