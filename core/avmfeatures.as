@@ -908,8 +908,8 @@ function main() {
     s += "#ifdef AVMSHELL_BUILD\n";
     s += "extern const char * const avmfeatures;\n";
     s += "#endif\n\n";
-    print('writing avmfeatures.h');
-    File.write("avmfeatures.h", s);
+    print('writing generated/avmfeatures.h');
+    File.write("generated/avmfeatures.h", s);
 
     // Generate avmfeatures.cpp
 
@@ -926,31 +926,8 @@ function main() {
         s += showFeature(feature);
     s += ";\n\n"
     s += "#endif // AVMSHELL_BUILD\n";
-    print('writing avmfeatures.cpp');
-    File.write("avmfeatures.cpp", s);
-
-    // Generate ../build/avmfeatures.py
-
-    s = newString("#");
-    s += "\n\n";
-    s += "def featureSettings(o):\n";
-    s += "    args = \"\"\n";
-    for each ( feature in FEATURES.feature )
-        s += configureFeature(feature);
-    for each ( feature in FEATURES.tweak )
-        s += configureFeature(feature);
-    s += "    return args\n";
-
-    s += "\ndef builtinBuildFlags(o):\n";
-    s += "    buildFlags = \"\"\n";
-    for each ( feature in FEATURES.feature )
-        s += featureFlags(feature);
-    for each ( feature in FEATURES.tweak )
-        s += featureFlags(feature);
-    s += "    return buildFlags\n";
-
-    print('writing ../build/avmfeatures.py');
-    File.write("../build/avmfeatures.py", s);
+    print('writing generated/avmfeatures.cpp');
+    File.write("generated/avmfeatures.cpp", s);
 }
 
 function newString(prefix="//") {
