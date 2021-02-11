@@ -9,8 +9,8 @@
 
 #include <core/avmplus.h>
 
-#include "extensions-tracers.h"
-#include "avmshell-tracers.h"
+#include "../../generated/extensions-tracers.h"
+#include "../../generated/avmshell-tracers.h"
 
 #ifdef VMCFG_SELFTEST
 // Allow selftests coded directly to nanojit APIs.

@@ -49,7 +49,7 @@ elseif (${CMAKE_HOST_UNIX})
             src/PosixPartialPlatform.cpp)
 endif ()
 
-target_link_libraries(shell extensions generated core vmbase eval)
+target_link_libraries(shell extensions core vmbase eval)
 target_include_directories(core
         PRIVATE
         src generated
@@ -57,12 +57,21 @@ target_include_directories(core
         include)
 
 include(nativegen)
+include(exactgc)
 
 asc_add_command(shell.as SHELL_ABC
         ASC_ARGUMENTS -md -builtin -apiversioning -import ${BUILTIN_ABC})
 nativegen("${BUILTIN_ABC};${SHELL_ABC}" generated NATIVEGENS)
 
+set(exactgc_avmshell src/shell_toplevel.as test/shell_test.as src/DebugCLI.h src/ShellCore.h src/SystemClass.h)
+set(exactgc_avmplus src/DomainClass.h src/Domain.as)
+
+exactgc("${exactgc_avmshell}" avmshell generated/avmshell-tracers.hh generated/avmshell-tracers.h)
+exactgc("${exactgc_avmplus}" avmplus generated/extensions-tracers.hh generated/extensions-tracers.h)
+
 add_custom_target(shell_generated
-        DEPENDS ${SHELL_ABC} ${NATIVEGENS})
+        DEPENDS ${SHELL_ABC} ${NATIVEGENS}
+        generated/avmshell-tracers.hh generated/avmshell-tracers.h
+        generated/extensions-tracers.hh generated/extensions-tracers.h)
 
 set(SHELL_ABC ${SHELL_ABC} PARENT_SCOPE)

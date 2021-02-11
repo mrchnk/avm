@@ -10,8 +10,8 @@
 #endif
 #include <float.h>
 
-#include "extensions-tracers.hh"
-#include "avmshell-tracers.hh"
+#include "../generated/extensions-tracers.hh"
+#include "../generated/avmshell-tracers.hh"
 
 #ifdef VMCFG_HALFMOON
 #include "../halfmoon/hm-main.h"  //  halfmoon::enable_mode
