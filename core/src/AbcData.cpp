@@ -7,7 +7,7 @@
 #include <core/avmplus.h>
 #include "BuiltinNatives.h"
 
-#include "builtin.cpp"
+#include "../generated/builtin.cpp"
 
 namespace avmplus
 {

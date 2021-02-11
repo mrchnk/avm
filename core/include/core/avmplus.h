@@ -358,7 +358,7 @@ namespace avmplus
 
 #include "../../src/ExactGCTests.h"
 
-#include "builtin-classes.hh"
+#include "../../generated/builtin-classes.hh"
 
 // inline implementations
 
