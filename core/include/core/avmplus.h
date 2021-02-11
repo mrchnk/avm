@@ -54,7 +54,7 @@
 #include "../../src/avmbuild.h"       // old-style configuration, may disappear, handles a few things not yet handled by the feature system
 #include "atom.h"
 #include "../../src/atom-inlines.h"
-#include "avmplus-tracers.h"
+#include "../generated/avmplus-tracers.h"
 #include "GCTypes.h"
 #include "../../src/avmplusVersion.h"
 #include "../../src/AvmLog.h"

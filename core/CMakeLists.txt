@@ -104,8 +104,12 @@ add_library(core
 
 include(nativegen)
 include(apivergen)
+include(exactgc)
 
-target_link_libraries(core AVMPI generated MMgc pcre lzma nanojit zlib)
+file(GLOB exactgc_as src/*.as)
+file(GLOB exactgc_h src/*.h)
+
+target_link_libraries(core AVMPI MMgc pcre lzma nanojit zlib)
 target_include_directories(core
         PRIVATE
         src generated include/core
@@ -115,8 +119,13 @@ target_include_directories(core
 asc_add_command(builtin.as BUILTIN_ABC ASC_ARGUMENTS -md -builtin -apiversioning -config CONFIG::VMCFG_FLOAT=false)
 nativegen(${BUILTIN_ABC} generated NATIVEGENS)
 apivergen(api-versions.xml generated APIVERGENS)
+exactgc("${exactgc_as};${exactgc_h}" avmplus
+        generated/avmplus-tracers.hh
+        generated/avmplus-tracers.h)
 
 add_custom_target(core_generated
-        DEPENDS ${BUILTIN_ABC} ${NATIVEGENS} ${APIVERGENS})
+        DEPENDS ${BUILTIN_ABC} ${NATIVEGENS} ${APIVERGENS}
+        generated/avmplus-tracers.hh
+        generated/avmplus-tracers.h)
 
 set(BUILTIN_ABC ${BUILTIN_ABC} PARENT_SCOPE)

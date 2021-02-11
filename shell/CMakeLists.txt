@@ -34,5 +34,5 @@ elseif (${CMAKE_HOST_UNIX})
             PosixPartialPlatform.cpp)
 endif ()
 
-target_link_libraries(shell extensions core vmbase eval)
+target_link_libraries(shell extensions generated core vmbase eval)
 target_include_directories(shell PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -19,7 +19,7 @@
 
 #include "../generated/api-versions.cpp"
 
-#include "avmplus-tracers.hh"
+#include "../generated/avmplus-tracers.hh"
 
 /*
  * TUNABLE PARAMETER: OSR_THRESHOLD_DEFAULT

@@ -3668,7 +3668,7 @@ MMgc::GCTracerCheckResult Toplevel::gcTraceOffsetIsTraced(uint32_t off) const
     if((result = _traitsToAliasMap.gcTraceOffsetIsTraced(off - offsetof(Toplevel,_traitsToAliasMap))) != MMgc::kOffsetNotFound) {
         return result;
     }
-    return MMgc::GC::CheckOffsetIsInList(off,gcTracePointerOffsets,19);
+    return MMgc::GC::CheckOffsetIsInList(off,gcTracePointerOffsets,18);
 }
 #endif // DEBUG
 
