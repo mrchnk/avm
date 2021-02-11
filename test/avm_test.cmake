@@ -12,6 +12,7 @@ function(avm_test command glob)
         _avm_test_set_property("${files}" PROPERTY AVM_TEST_IGNORE 1)
     elseif (command STREQUAL ADD)
         _avm_parse_arguments(${ARGN})
+        set(abcs "")
         foreach (file ${files})
             _avm_test_add(${file} abc ${ARGN})
             if (abc)
@@ -34,7 +35,6 @@ function(avm_test_target target_name)
     get_directory_property(abc AVM_TEST_ABCS)
     add_custom_target(${target_name} DEPENDS ${abc})
 endfunction()
-
 
 macro(_avm_test_set_property files)
     foreach (file ${files})
@@ -73,10 +73,18 @@ function(_avm_test_add file out_abc)
 
     get_filename_component(ext ${file} LAST_EXT)
     if (ext STREQUAL .as)
-        asc_add_command(${file} abc ${arguments} ${ARGN})
+        avm_test_support(${file} support)
+        asc_add_command(${file} abc
+                SUPPORT ${arg_SUPPORT}
+                SUPPORT ${support}
+                INCLUDE ${arg_INCLUDE}
+                IMPORT ${arg_IMPORT}
+                ASC_ARGUMENTS ${arg_ASC_ARGUMENTS}
+                WORKING_DIRECTORY ${working_directory})
         avm_add_test(${test_name} "${abc}" ${arguments} ${ARGN})
     elseif (ext STREQUAL .abs)
-        abcasm_add_command(${file} abc ${arguments} ${ARGN})
+        abcasm_add_command(${file} abc ${arguments}
+                WORKING_DIRECTORY ${working_directory})
         avm_add_test(${test_name} "${abc}" ${arguments} ${ARGN})
     elseif (ext STREQUAL .abc)
         avm_add_test(${test_name} "${file}" ${arguments} ${ARGN})
@@ -84,7 +92,11 @@ function(_avm_test_add file out_abc)
         message(SEND_ERROR "Unsupported test source ${file}")
     endif ()
     if (out_abc)
-        set(${out_abc} "${abc}" PARENT_SCOPE)
+        if (disabled)
+            set(${out_abc} "" PARENT_SCOPE)
+        else()
+            set(${out_abc} "${abc}" PARENT_SCOPE)
+        endif()
     endif()
 endfunction()
 
@@ -123,89 +135,6 @@ function(avm_add_test test_name abcs)
 
 endfunction()
 
-function(asc_add_target target_name file out_abc)
-    asc_add_command(${file} abc ${ARGN})
-    add_custom_target(${target_name} DEPENDS ${abc})
-    if (out_abc)
-        set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
-endfunction()
-
-function(asc_add_command file out_abc)
-    _avm_parse_arguments(${ARGN})
-    get_filename_component(file ${file} ABSOLUTE)
-
-    set(abc "")
-    set(commands "")
-    set(import "")
-    set(include "")
-
-    foreach (inc ${arg_INCLUDE})
-        _avm_working_path(inc ${inc})
-        list(APPEND include -in ${inc})
-    endforeach ()
-
-    foreach (imp ${arg_IMPORT})
-        _avm_working_path(imp ${imp})
-        list(APPEND import -import ${imp})
-    endforeach ()
-
-    _avm_support(support ${file})
-    foreach (sup ${arg_SUPPORT} ${support})
-        _get_abc_file(sup_abc ${sup})
-        list(APPEND abc ${sup_abc})
-        _avm_working_path(sup ${sup})
-        _avm_working_path(sup_abc ${sup_abc})
-        list(APPEND commands COMMAND ${ASC} ${arg_ASC_ARGUMENTS} ${import} ${sup})
-        list(APPEND import -import ${sup_abc})
-    endforeach ()
-
-    _get_abc_file(target_abc ${file})
-    list(APPEND abc ${target_abc})
-
-    _avm_working_path(target ${file})
-    list(APPEND commands COMMAND ${ASC} ${arg_ASC_ARGUMENTS} ${import} ${include} ${target})
-
-    add_custom_command(OUTPUT ${target_abc}
-            ${commands}
-            VERBATIM
-            WORKING_DIRECTORY ${working_directory})
-
-    if (out_abc)
-        set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
-endfunction()
-
-function(abcasm_add_target target_name file out_abc)
-    abcasm_add_command(${file} abc ${ARGN})
-    add_custom_target(${target_name} DEPENDS ${abc})
-    if (out_abc)
-        set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
-endfunction()
-
-function(abcasm_add_command file out_abc)
-    _avm_parse_arguments(${ARGN})
-    get_filename_component(file ${file} ABSOLUTE)
-
-    _get_abc_file(abc ${file})
-
-    _avm_working_path(target ${file})
-    get_filename_component(output_directory ${target} DIRECTORY)
-    if (NOT output_directory)
-        set(output_directory .)
-    endif ()
-
-    add_custom_command(OUTPUT ${abc}
-            COMMAND ${ABCASM} -input ${target} -o ${output_directory}
-            VERBATIM
-            WORKING_DIRECTORY ${working_directory})
-
-    if (out_abc)
-        set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
-endfunction()
-
 macro(_avm_parse_arguments)
     cmake_parse_arguments(arg
             # options
@@ -230,10 +159,34 @@ macro(_avm_parse_arguments)
         set(disabled DISABLED)
     endif ()
 
+    if (arg_FLOAT)
+        list(APPEND arg_AVM_ARGUMENTS -abcfuture)
+    endif()
+
     if (arg_USES_SWF_VERSIONS)
         set(arg_SWF_VERSIONS 9 10 11 12 13 14 15 16 17 18)
     endif ()
 endmacro()
+
+function(avm_test_support file out_var)
+    get_filename_component(dir ${file} DIRECTORY)
+    get_filename_component(name ${file} NAME_WLE)
+    set(sup_dir ${dir}/${name})
+    file(GLOB support ${sup_dir}/*.as)
+    if (support)
+        list(LENGTH support length)
+        if (length GREATER 1)
+            foreach (sup ${support})
+                get_filename_component(sup_name ${sup} NAME)
+                if (NOT sup_name MATCHES "^[A-Z]_")
+                    message(WARNING "Support code at ${sup_dir} may not be ordered correctly")
+                    break()
+                endif ()
+            endforeach ()
+        endif ()
+    endif ()
+    set(${out_var} "${support}" PARENT_SCOPE)
+endfunction()
 
 function(_avm_working_path out_var file)
     get_filename_component(file_abs ${file} ABSOLUTE)
@@ -259,23 +212,3 @@ macro(_avm_test test_name)
         set_tests_properties(${test_name} PROPERTIES PASS_REGULAR_EXPRESSION ${arg_PASS_REGULAR_EXPRESSION})
     endif ()
 endmacro()
-
-function(_avm_support out_var file)
-    get_filename_component(dir ${file} DIRECTORY)
-    get_filename_component(name ${file} NAME_WLE)
-    set(sup_dir ${dir}/${name})
-    file(GLOB support ${sup_dir}/*.as)
-    if (support)
-        list(LENGTH support length)
-        if (length GREATER 1)
-            foreach (sup ${support})
-                get_filename_component(sup_name ${sup} NAME)
-                if (NOT sup_name MATCHES "^[A-Z]_")
-                    message(WARNING "Support code at ${sup_dir} may not be ordered correctly")
-                    break()
-                endif ()
-            endforeach ()
-        endif ()
-    endif ()
-    set(support ${support} PARENT_SCOPE)
-endfunction()
