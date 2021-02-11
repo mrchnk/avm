@@ -10,6 +10,11 @@
 // so they end up in a single script that initializes all
 // at once, in the order of includes below.
 
+package {
+    include "generated/api-versions.as";
+    CONFIG const NO_VMCFG_FLOAT = !CONFIG::VMCFG_FLOAT;
+}
+
 include "src/Object.as"
 include "src/Class.as"
 include "src/Function.as"

@@ -7,8 +7,6 @@
 package flash.utils
 {
 
-include "api-versions.as"
-
 /**
  * The CompressionAlgorithm class defines string constants for the names of compress and uncompress options. These constants
  * are used as values of the <code>algorithm</code> parameter of the <code>ByteArray.compress()</code>
@@ -55,8 +53,6 @@ public final class CompressionAlgorithm
 
 // Provide dummy definitions here of IDataInput2 and IDataOutput2, because they will
 // not be provided by IDataInput.as and IDataOutput.as if VMCFG_FLOAT is disabled.
-
-CONFIG const NO_VMCFG_FLOAT = !CONFIG::VMCFG_FLOAT;
 
 CONFIG::NO_VMCFG_FLOAT
 internal interface IDataInput2 extends IDataInput {

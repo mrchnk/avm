@@ -6,8 +6,6 @@
  
 package flash.utils
 {
-    // Need to include this because IDataInput.as is not included into builtin.as.
-    include "api-versions.as";
 
 /**
 * The IDataOutput interface provides a set of methods for writing binary data.

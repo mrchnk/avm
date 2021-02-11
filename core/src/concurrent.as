@@ -8,7 +8,6 @@ package flash.concurrent
 {
 
 import flash.errors.IllegalOperationError;
-include "api-versions.as"
 
 /**
  * The Mutex (short for "mutual exclusion") class provides a way to make sure 

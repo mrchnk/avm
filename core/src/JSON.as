@@ -20,10 +20,6 @@
 package
 {
 
-    include "api-versions.as";
-
-    CONFIG const NO_VMCFG_FLOAT = !CONFIG::VMCFG_FLOAT;
-
     /**
     * The JSON class lets applications import and export data using JavaScript Object Notation (JSON) format. JSON is an industry-standard data interchange
     * format that is described at <a href="http://www.json.org">http://www.json.org</a>.

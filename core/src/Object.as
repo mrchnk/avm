@@ -7,8 +7,6 @@
 
 package
 {
-    include "api-versions.as"
-
     /*
     AS3 implementation constraint:
     Object cannot have any per-instance properties, because it is extended by Boolean, String,
