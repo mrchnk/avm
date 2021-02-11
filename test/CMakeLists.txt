@@ -1,6 +1,6 @@
 include(avm_test.cmake)
 
-set(ASC ${ASC} -import ${BUILTIN_ABC} -import ${CMAKE_SOURCE_DIR}/generated/shell_toplevel.abc)
+set(ASC ${ASC} -import ${BUILTIN_ABC} -import ${SHELL_ABC})
 
 add_subdirectory(acceptance)
 add_subdirectory(cmdline)

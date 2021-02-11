@@ -4,8 +4,8 @@
 
 /* machine generated file -- do not edit */
 
-#ifndef _H_nativegen_classes_shell_toplevel
-#define _H_nativegen_classes_shell_toplevel
+#ifndef _H_nativegen_classes_shell
+#define _H_nativegen_classes_shell
 
 namespace avmplus {
 
@@ -3081,4 +3081,4 @@ private:
 #define avmplus_WorkerEventClass_isExactInterlock 1
 }
 
-#endif // _H_nativegen_classes_shell_toplevel
+#endif // _H_nativegen_classes_shell

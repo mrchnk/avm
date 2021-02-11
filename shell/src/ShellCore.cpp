@@ -6,8 +6,8 @@
 
 #include <shell/avmshell.h>
 
-#include "shell_toplevel-classes.hh"
-#include "shell_toplevel.cpp"
+#include "../generated/shell-classes.hh"
+#include "../generated/shell.cpp"
 
 namespace avmshell
 {
@@ -142,7 +142,7 @@ namespace avmshell
         shellNInit.fillInMethods(avmplus::NativeID::shell_toplevel_methodEntries);
         shellPool = shellNInit.parseBuiltinABC(shell_domain);
 #else
-        shellPool = AVM_INIT_BUILTIN_ABC_IN_DOMAIN(shell_toplevel, this, shell_domain);
+        shellPool = AVM_INIT_BUILTIN_ABC_IN_DOMAIN(shell, this, shell_domain);
 #endif
     }
 
@@ -180,7 +180,7 @@ namespace avmshell
         ShellCodeContext* shell_codeContext = new(GetGC()) ShellCodeContext(shell_domainEnv, shell_bugCompatibility);
 
         //handleActionPool(shellPool, shell_toplevel, shell_codeContext);
-        shell_toplevel->shellClasses = prepareBuiltinActionPool<avmplus::shell_toplevelClassManifest>(shellPool, shell_toplevel, shell_codeContext);
+        shell_toplevel->shellClasses = prepareBuiltinActionPool<avmplus::shellClassManifest>(shellPool, shell_toplevel, shell_codeContext);
 
 #ifdef VMCFG_VERIFYALL
         if (!config.verifyonly)

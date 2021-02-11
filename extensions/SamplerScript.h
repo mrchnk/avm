@@ -8,7 +8,7 @@
 #define __avmplus_SamplerScript__
 
 #ifdef AVMSHELL_BUILD
-#include "shell_toplevel-classes.hh"
+#include <shell/avmshell.h>
 #else
 #include "platformbuild.h"
 #include "avmplayer.h"

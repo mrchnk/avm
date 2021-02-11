@@ -6,10 +6,10 @@
 
 namespace avmplus { namespace NativeID {
 
-const uint32_t shell_toplevel_abc_class_count = 54;
-const uint32_t shell_toplevel_abc_script_count = 7;
-const uint32_t shell_toplevel_abc_method_count = 276;
-const uint32_t shell_toplevel_abc_length = 18126;
+const uint32_t shell_abc_class_count = 54;
+const uint32_t shell_abc_script_count = 7;
+const uint32_t shell_abc_method_count = 276;
+const uint32_t shell_abc_length = 18126;
 
 /* thunks (74 total) */
 avmplus::Atom avmplus_Domain_currentDomain_get_thunk(MethodEnv* env, uint32_t argc, Atom* argv)
@@ -2270,9 +2270,9 @@ REALLY_INLINE void SlotOffsetsAndAsserts::check_avmshell_ShellWorkerDomainClass(
 #endif // DEBUG
 
 
-AVMTHUNK_BEGIN_NATIVE_TABLES(shell_toplevel)
+AVMTHUNK_BEGIN_NATIVE_TABLES(shell)
 
-    AVMTHUNK_BEGIN_NATIVE_METHODS(shell_toplevel)
+    AVMTHUNK_BEGIN_NATIVE_METHODS(shell)
         AVMTHUNK_NATIVE_METHOD(avmplus_MI_plus, ::avmshell::MIObjectImpl::plus)
         AVMTHUNK_NATIVE_METHOD(avmplus_System_exit, avmshell::SystemClass::exit)
         AVMTHUNK_NATIVE_METHOD(avmplus_System_exec, avmshell::SystemClass::exec)
@@ -2349,7 +2349,7 @@ AVMTHUNK_BEGIN_NATIVE_TABLES(shell_toplevel)
         AVMTHUNK_NATIVE_METHOD(flash_system_WorkerDomain_listWorkers, avmshell::ShellWorkerDomainObject::listWorkers)
     AVMTHUNK_END_NATIVE_METHODS()
 
-    AVMTHUNK_BEGIN_NATIVE_CLASSES(shell_toplevel)
+    AVMTHUNK_BEGIN_NATIVE_CLASSES(shell)
         AVMTHUNK_NATIVE_CLASS(abcclass_avmplus_CTest, CTestClass, avmplus::CTestClass, SlotOffsetsAndAsserts::kSlotsOffset_avmplus_CTestClass, avmplus::CTestObject, SlotOffsetsAndAsserts::kSlotsOffset_avmplus_CTestObject, false, false, false)
         AVMTHUNK_NATIVE_CLASS(abcclass_avmplus_MI, MIClass, avmshell::MIClass, SlotOffsetsAndAsserts::kSlotsOffset_avmshell_MIClass, avmshell::MIObject, SlotOffsetsAndAsserts::kSlotsOffset_avmshell_MIObject, false, false, false)
         AVMTHUNK_NATIVE_CLASS(abcclass_avmplus_System, SystemClass, avmshell::SystemClass, SlotOffsetsAndAsserts::kSlotsOffset_avmshell_SystemClass, avmplus::SystemObject, SlotOffsetsAndAsserts::kSlotsOffset_avmplus_SystemObject, false, false, false)
@@ -2397,10 +2397,10 @@ AVMTHUNK_BEGIN_NATIVE_TABLES(shell_toplevel)
 
 AVMTHUNK_END_NATIVE_TABLES()
 
-AVMTHUNK_DEFINE_NATIVE_INITIALIZER(shell_toplevel)
+AVMTHUNK_DEFINE_NATIVE_INITIALIZER(shell)
 
 /* abc */
-const uint8_t shell_toplevel_abc_data[18126] = {
+const uint8_t shell_abc_data[18126] = {
   16,   0,  46,   0,   8,  42, 101,   0,   2,   1,   3,   4,   0,   8,   0,   0,
    0,   0,   0,   0, 232,  63,   0,   0,   0,   0,   0,   0, 240,  63,   0,   0,
    0,   0,   0,   0,   0,  64,   0,   0,   0,   0,   0,   0,   8,  64,   0,   0,
@@ -3537,7 +3537,7 @@ const uint8_t shell_toplevel_abc_data[18126] = {
 
 
 /* versioned_uris */
-const char* const shell_toplevel_versioned_uris[] = {
+const char* const shell_versioned_uris[] = {
     "__AS3__.vec", // [660]
     "avm2.intrinsics.memory", // [684]
     "avmplus", // [660]
@@ -3583,7 +3583,7 @@ extern "C" const struct {
     const char* const n_26; avmshell::ShellWorkerDomainObject* const m_26;
     const char* const n_27; avmshell::ShellWorkerObject* const m_27;
     const char* const n_28; avmshell::SystemClass* const m_28;
-} aotABCTypes_shell_toplevel = {
+} aotABCTypes_shell = {
     "DomainClass", 0,
     "DomainObject", 0,
     "NewObjectSampleClass", 0,

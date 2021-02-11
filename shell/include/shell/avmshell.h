@@ -62,7 +62,7 @@ namespace avmplus
 
 }
 
-#include "shell_toplevel.h"
+#include "../../generated/shell.h"
 
 namespace avmshell
 {
@@ -88,12 +88,12 @@ namespace avmshell
 #include "../../src/FileClass.h"
 #include "../../src/DomainClass.h"
 #include "../../src/DebugCLI.h"
-#include "SamplerScript.h"
 #include "../../src/ShellCore.h"
 #include "../../src/ShellWorkerGlue.h"
 #include "../../src/ShellWorkerDomainGlue.h"
 
-#include "shell_toplevel-classes.hh"
+#include "../../generated/shell-classes.hh"
+#include "SamplerScript.h"
 
 namespace avmshell
 {

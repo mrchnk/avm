@@ -55,3 +55,14 @@ target_include_directories(core
         src generated
         INTERFACE
         include)
+
+include(nativegen)
+
+asc_add_command(shell.as SHELL_ABC
+        ASC_ARGUMENTS -md -builtin -apiversioning -import ${BUILTIN_ABC})
+nativegen("${BUILTIN_ABC};${SHELL_ABC}" generated NATIVEGENS)
+
+add_custom_target(shell_generated
+        DEPENDS ${SHELL_ABC} ${NATIVEGENS})
+
+set(SHELL_ABC ${SHELL_ABC} PARENT_SCOPE)

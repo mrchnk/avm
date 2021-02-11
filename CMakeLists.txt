@@ -37,4 +37,4 @@ add_subdirectory(other-licenses/lzma)
 add_subdirectory(other-licenses/zlib)
 add_subdirectory(nanojit)
 
-add_subdirectory(test)
+#add_subdirectory(test)

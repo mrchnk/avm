@@ -4,8 +4,8 @@
 
 /* machine generated file -- do not edit */
 
-#ifndef _H_nativegen_header_shell_toplevel
-#define _H_nativegen_header_shell_toplevel
+#ifndef _H_nativegen_header_shell
+#define _H_nativegen_header_shell
 
 namespace avmplus {
     class ArrayObject; // Array
@@ -127,13 +127,13 @@ namespace avmshell {
 
 namespace avmplus { namespace NativeID {
 
-extern const uint32_t shell_toplevel_abc_class_count;
-extern const uint32_t shell_toplevel_abc_script_count;
-extern const uint32_t shell_toplevel_abc_method_count;
-extern const uint32_t shell_toplevel_abc_length;
-extern const uint8_t shell_toplevel_abc_data[];
-extern const char* const shell_toplevel_versioned_uris[];
-AVMTHUNK_DECLARE_NATIVE_INITIALIZER(shell_toplevel)
+extern const uint32_t shell_abc_class_count;
+extern const uint32_t shell_abc_script_count;
+extern const uint32_t shell_abc_method_count;
+extern const uint32_t shell_abc_length;
+extern const uint8_t shell_abc_data[];
+extern const char* const shell_versioned_uris[];
+AVMTHUNK_DECLARE_NATIVE_INITIALIZER(shell)
 
 /* classes */
 const uint32_t abcclass_avmplus_ITest = 0;
@@ -2404,7 +2404,7 @@ class avmshell_ShellWorkerDomainObjectSlots
 } }
 namespace avmplus {
 
-class shell_toplevelClassManifest : public avmplus::ClassManifestBase
+class shellClassManifest : public avmplus::ClassManifestBase
 {
     friend class avmplus::AvmCore;
     friend class avmplus::IntVectorClass;
@@ -2414,8 +2414,8 @@ class shell_toplevelClassManifest : public avmplus::ClassManifestBase
     friend class avmplus::DoubleVectorClass;
     friend class avmplus::ObjectVectorClass;
 private:
-    REALLY_INLINE shell_toplevelClassManifest(avmplus::ScriptEnv* e) : ClassManifestBase(54, e) { }
-    REALLY_INLINE static shell_toplevelClassManifest* create(avmplus::ScriptEnv* e) { return new (MMgc::GC::GetGC(e), MMgc::kExact, sizeof(ClassClosure*)*53) shell_toplevelClassManifest(e); }
+    REALLY_INLINE shellClassManifest(avmplus::ScriptEnv* e) : ClassManifestBase(54, e) { }
+    REALLY_INLINE static shellClassManifest* create(avmplus::ScriptEnv* e) { return new (MMgc::GC::GetGC(e), MMgc::kExact, sizeof(ClassClosure*)*53) shellClassManifest(e); }
 public:
     REALLY_INLINE GCRef<avmshell::AbstractBaseClass> get_AbstractBaseClass() { return (avmshell::AbstractBaseClass*)(lazyInitClass(avmplus::NativeID::abcclass_avmshell_AbstractBase)); }
     REALLY_INLINE GCRef<avmshell::AbstractRestrictedBaseClass> get_AbstractRestrictedBaseClass() { return (avmshell::AbstractRestrictedBaseClass*)(lazyInitClass(avmplus::NativeID::abcclass_avmshell_AbstractRestrictedBase)); }
@@ -2473,4 +2473,4 @@ public:
     REALLY_INLINE GCRef<avmplus::public_interface_FP_10_0_32_AIR_1_0_FP_10_0Class> get_public_interface_FP_10_0_32_AIR_1_0_FP_10_0Class() { return (avmplus::public_interface_FP_10_0_32_AIR_1_0_FP_10_0Class*)(lazyInitClass(avmplus::NativeID::abcclass_avmshell_public_interface_FP_10_0_32_AIR_1_0_FP_10_0)); }
 };
 }
-#endif // _H_nativegen_header_shell_toplevel
+#endif // _H_nativegen_header_shell

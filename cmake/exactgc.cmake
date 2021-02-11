@@ -1,5 +1,5 @@
 asc_add_command(${CMAKE_SOURCE_DIR}/utils/exactgc.as EXACTGC_ABC
-        IMPORT ${CMAKE_SOURCE_DIR}/core/builtin.abc ${CMAKE_SOURCE_DIR}/generated/shell_toplevel.abc)
+        IMPORT ${CMAKE_SOURCE_DIR}/core/builtin.abc ${CMAKE_SOURCE_DIR}/shell/shell.abc)
 
 function(exactgc files namespace tracers interlock)
     get_filename_component(tracers ${tracers} ABSOLUTE)

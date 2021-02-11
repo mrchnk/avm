@@ -1,5 +1,5 @@
 asc_add_command(${CMAKE_SOURCE_DIR}/utils/apivergen.as APIVERGEN_ABC
-        IMPORT ${CMAKE_SOURCE_DIR}/core/builtin.abc ${CMAKE_SOURCE_DIR}/generated/shell_toplevel.abc)
+        IMPORT ${CMAKE_SOURCE_DIR}/core/builtin.abc ${CMAKE_SOURCE_DIR}/shell/shell.abc)
 
 function(apivergen xml output_directory generated)
     get_filename_component(working_directory ${output_directory} ABSOLUTE)
