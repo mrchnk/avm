@@ -103,6 +103,7 @@ add_library(core
         src/Isolate.cpp)
 
 include(nativegen)
+include(apivergen)
 
 target_link_libraries(core AVMPI generated MMgc pcre lzma nanojit zlib)
 target_include_directories(core
@@ -112,9 +113,10 @@ target_include_directories(core
         include)
 
 asc_add_command(builtin.as BUILTIN_ABC ASC_ARGUMENTS -md -builtin -apiversioning -config CONFIG::VMCFG_FLOAT=false)
-nativegen(${BUILTIN_ABC} generated BUILTIN_NATIVEGEN)
+nativegen(${BUILTIN_ABC} generated NATIVEGENS)
+apivergen(api-versions.xml generated APIVERGENS)
 
 add_custom_target(core_generated
-        DEPENDS ${BUILTIN_ABC} ${BUILTIN_NATIVEGEN})
+        DEPENDS ${BUILTIN_ABC} ${NATIVEGENS} ${APIVERGENS})
 
 set(BUILTIN_ABC ${BUILTIN_ABC} PARENT_SCOPE)
