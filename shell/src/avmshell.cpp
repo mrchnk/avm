@@ -4,9 +4,9 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_NANOJIT
-#include "../nanojit/nanojit.h"
+#include "nanojit.h"
 #endif
 #include <float.h>
 

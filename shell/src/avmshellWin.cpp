@@ -8,7 +8,7 @@
 
 #pragma warning(disable: 4201)
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #include "WinFile.h"
 
 namespace avmshell

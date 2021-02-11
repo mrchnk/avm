@@ -5,7 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 
 #ifndef AVMSHELL_BUILD
 #error "This file is only for use with avmshell"

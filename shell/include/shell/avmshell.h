@@ -14,7 +14,7 @@
 
 #ifdef VMCFG_SELFTEST
 // Allow selftests coded directly to nanojit APIs.
-#include "../nanojit/nanojit.h"
+#include "nanojit.h"
 #endif
 
 #if defined AVMPLUS_MAC || defined AVMPLUS_UNIX
@@ -79,19 +79,19 @@ namespace avmshell
 }
 
 #include "Selftest.h"
-#include "Platform.h"
-#include "File.h"
+#include "../../src/Platform.h"
+#include "../../src/File.h"
 
-#include "FileInputStream.h"
-#include "ConsoleOutputStream.h"
-#include "SystemClass.h"
-#include "FileClass.h"
-#include "DomainClass.h"
-#include "DebugCLI.h"
+#include "../../src/FileInputStream.h"
+#include "../../src/ConsoleOutputStream.h"
+#include "../../src/SystemClass.h"
+#include "../../src/FileClass.h"
+#include "../../src/DomainClass.h"
+#include "../../src/DebugCLI.h"
 #include "SamplerScript.h"
-#include "ShellCore.h"
-#include "ShellWorkerGlue.h"
-#include "ShellWorkerDomainGlue.h"
+#include "../../src/ShellCore.h"
+#include "../../src/ShellWorkerGlue.h"
+#include "../../src/ShellWorkerDomainGlue.h"
 
 #include "shell_toplevel-classes.hh"
 

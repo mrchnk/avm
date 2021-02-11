@@ -4,22 +4,23 @@
 * License, v. 2.0. If a copy of the MPL was not distributed with this
 * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-//mac
+//unix/solaris
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #include "PosixPartialPlatform.h"
 
-#include <sys/signal.h>
+#include <signal.h>
 #include <unistd.h>
+
 #include <sys/resource.h>
 
 namespace avmshell
 {
-    class MacPlatform : public PosixPartialPlatform
+    class UnixPlatform : public PosixPartialPlatform
     {
     public:
-        MacPlatform(void* stackbase) : stackbase(stackbase) {}
-        virtual ~MacPlatform() {}
+        UnixPlatform(void* stackbase) : stackbase(stackbase) {}
+        virtual ~UnixPlatform() {}
 
         virtual void setTimer(int seconds, AvmTimerCallback callback, void* callbackData);
         virtual uintptr_t getMainThreadStackLimit();
@@ -28,7 +29,10 @@ namespace avmshell
         void* stackbase;
     };
 
-    uintptr_t MacPlatform::getMainThreadStackLimit()
+    AvmTimerCallback pCallbackFunc = 0;
+    void* pCallbackData = 0;
+
+    uintptr_t UnixPlatform::getMainThreadStackLimit()
     {
         struct rlimit r;
         size_t stackheight = avmshell::kStackSizeFallbackValue;
@@ -36,13 +40,10 @@ namespace avmshell
         // is not ideal if the stack is meant to be unlimited but is an OK workaround for the time being.
         if (getrlimit(RLIMIT_STACK, &r) == 0 && r.rlim_cur != RLIM_INFINITY)
             stackheight = size_t(r.rlim_cur);
-        return uintptr_t(stackbase) - stackheight + avmshell::kStackMargin;
+        return uintptr_t(&stackbase) - stackheight + avmshell::kStackMargin;
     }
 
-    AvmTimerCallback pCallbackFunc = 0;
-    void* pCallbackData = 0;
-
-    void MacPlatform::setTimer(int seconds, AvmTimerCallback callback, void* callbackData)
+    void UnixPlatform::setTimer(int seconds, AvmTimerCallback callback, void* callbackData)
     {
         extern void alarmProc(int);
 
@@ -58,25 +59,22 @@ namespace avmshell
     {
         pCallbackFunc(pCallbackData);
     }
+
 }
 
 int main(int argc, char *argv[])
 {
-#ifdef VMCFG_MACH_EXCEPTIONS
-    avmplus::GenericGuard::staticInit();
-#endif
-
     char* dummy;
-    avmshell::MacPlatform platformInstance(&dummy);
+    avmshell::UnixPlatform platformInstance(&dummy);
     avmshell::Platform::SetInstance(&platformInstance);
 
     int code = avmshell::Shell::run(argc, argv);
-    if (code == avmshell::OUT_OF_MEMORY)
-        write(1, "OUT OF MEMORY\n", 14);
-
-#ifdef VMCFG_MACH_EXCEPTIONS
-    avmplus::GenericGuard::staticDestroy();
-#endif
-
+    if (code == avmshell::OUT_OF_MEMORY) {
+        // Fascistic warnings settings for Linux64 require the value to be
+        // inspected, and a (void) cast is not sufficient.
+        if (write(1, "OUT OF MEMORY\n", 14) > 1) {
+            // do nothing
+        }
+    }
     return code;
 }

@@ -7,7 +7,7 @@
 #ifndef __avmshell_File__
 #define __avmshell_File__
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 
 namespace avmshell
 {

@@ -7,7 +7,6 @@
 package flash.system
 {
 
-    include "../core/api-versions.as"
     import flash.utils.Dictionary;
     import flash.utils.ByteArray;
 

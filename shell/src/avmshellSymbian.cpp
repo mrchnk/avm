@@ -4,7 +4,7 @@
 
 //unix/solaris
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #include "PosixPartialPlatform.h"
 
 #include <e32base.h>

@@ -7,7 +7,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_avmplus_basics {
@@ -150,7 +150,7 @@ void create_avmplus_basics(AvmCore* core) { new ST_avmplus_basics(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_avmplus_builtins {
@@ -210,7 +210,7 @@ void create_avmplus_builtins(AvmCore* core) { new ST_avmplus_builtins(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if defined AVMPLUS_PEEPHOLE_OPTIMIZER
 namespace avmplus {
@@ -312,7 +312,7 @@ void create_avmplus_peephole(AvmCore* core) { new ST_avmplus_peephole(core); }
 //
 // Code coverage will get worse with this test, not better.  C'est la guerre.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_avmplus_vector_accessors {
@@ -512,7 +512,7 @@ void create_avmplus_vector_accessors(AvmCore* core) { new ST_avmplus_vector_acce
 // gets to run after the first part of the large object has been popped off the mark stack
 // but before the rest has been handled.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if defined AVMPLUS_WIN32
 #if !defined VMCFG_ARM
@@ -689,7 +689,7 @@ void create_mmgc_bugzilla_543560(AvmCore* core) { new ST_mmgc_bugzilla_543560(co
 // finalization and mark-bit clearing.  Short term, lets just
 // try to detect this on our own.)
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_bugzilla_575631 {
@@ -828,7 +828,7 @@ void create_mmgc_bugzilla_575631(AvmCore* core) { new ST_mmgc_bugzilla_575631(co
 // (by coordinating with an adversarial gcheap) thus illustrating the
 // need for a sparse page map.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if defined AVMPLUS_64BIT && defined DEBUG
 namespace avmplus {
@@ -1109,7 +1109,7 @@ void create_mmgc_bugzilla_580603(AvmCore* core) { new ST_mmgc_bugzilla_580603(co
 
 // Bug 603411 - SECURITY: AvmCore dtor needs to clear CallStackNode chain
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if defined DEBUGGER
 namespace avmplus {
@@ -1251,7 +1251,7 @@ void create_mmgc_bugzilla_603411(AvmCore* core) { new ST_mmgc_bugzilla_603411(co
 // Bugzilla 637993: rehashing a GCHashtable in the midst of iteration
 // is unsound; here we check that we are guarding against it.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_bugzilla_637993 {
@@ -1401,7 +1401,7 @@ void create_mmgc_bugzilla_637993(AvmCore* core) { new ST_mmgc_bugzilla_637993(co
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_basics {
@@ -1951,7 +1951,7 @@ void create_mmgc_basics(AvmCore* core) { new ST_mmgc_basics(core); }
 // gets to run after the first part of the large object has been popped off the mark stack
 // but before the rest has been handled.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_dependent {
@@ -2126,7 +2126,7 @@ void create_mmgc_dependent(AvmCore* core) { new ST_mmgc_dependent(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_exact {
@@ -2196,7 +2196,7 @@ void create_mmgc_exact(AvmCore* core) { new ST_mmgc_exact(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_externalalloc {
@@ -2294,7 +2294,7 @@ void create_mmgc_externalalloc(AvmCore* core) { new ST_mmgc_externalalloc(core);
 // to an operator new() to get memory and the evaluation of arguments
 // to constructors is undefined"; see details below.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_finalize_uninit {
@@ -2510,7 +2510,7 @@ void create_mmgc_finalize_uninit(AvmCore* core) { new ST_mmgc_finalize_uninit(co
 
 // Bugzilla 663508: Add FixedMalloc::FindBeginning
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_fixedmalloc_findbeginning {
@@ -2789,7 +2789,7 @@ void create_mmgc_fixedmalloc_findbeginning(AvmCore* core) { new ST_mmgc_fixedmal
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_gcheap {
@@ -2854,7 +2854,7 @@ void create_mmgc_gcheap(AvmCore* core) { new ST_mmgc_gcheap(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_gcoption {
@@ -3237,7 +3237,7 @@ void create_mmgc_gcoption(AvmCore* core) { new ST_mmgc_gcoption(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_mmfx_array {
@@ -3317,7 +3317,7 @@ void create_mmgc_mmfx_array(AvmCore* core) { new ST_mmgc_mmfx_array(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if defined VMCFG_WORKERTHREADS
 namespace avmplus {
@@ -3484,7 +3484,7 @@ void create_mmgc_threads(AvmCore* core) { new ST_mmgc_threads(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_mmgc_weakref {
@@ -3664,7 +3664,7 @@ void create_mmgc_weakref(AvmCore* core) { new ST_mmgc_weakref(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_nanojit_codealloc {
@@ -3886,7 +3886,7 @@ void create_nanojit_codealloc(AvmCore* core) { new ST_nanojit_codealloc(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_vmbase_concurrency {
@@ -4372,7 +4372,7 @@ void create_vmbase_concurrency(AvmCore* core) { new ST_vmbase_concurrency(core);
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if defined VMCFG_SAFEPOINTS && defined BUG_754918
 namespace avmplus {
@@ -4929,7 +4929,7 @@ void create_vmbase_safepoints(AvmCore* core) { new ST_vmbase_safepoints(core); }
 // gets to run after the first part of the large object has been popped off the mark stack
 // but before the rest has been handled.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_vmpi_threads {
@@ -5461,7 +5461,7 @@ void create_vmpi_threads(AvmCore* core) { new ST_vmpi_threads(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if !defined DEBUGGER
 namespace avmplus {
@@ -5677,7 +5677,7 @@ void create_workers_Buffers(AvmCore* core) { new ST_workers_Buffers(core); }
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 #if !defined DEBUGGER
 namespace avmplus {
@@ -5774,7 +5774,7 @@ void create_workers_NoSyncSingleItemBuffer(AvmCore* core) { new ST_workers_NoSyn
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 #ifdef VMCFG_SELFTEST
 namespace avmplus {
 namespace ST_workers_Promise {

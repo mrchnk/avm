@@ -29,7 +29,7 @@
 /////////
 // TODO: Remove dependency of VMPI on the feature system
 #ifdef AVMSHELL_BUILD
-#include "../shell/avmshell-features.h"
+#include <shell/avmshell-features.h>
 #else
 /* The embedding host must provide this file in some directory that's included in
  * header search paths.  It must define a value (0 or 1) for every feature
