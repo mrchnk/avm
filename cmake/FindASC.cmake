@@ -1,4 +1,5 @@
 find_package(Java REQUIRED COMPONENTS Runtime)
+include(utils)
 
 set(FLEX_SDK_URL https://downloads.apache.org/flex/4.16.1/binaries/apache-flex-sdk-4.16.1-bin.tar.gz)
 set(FLEX_SDK_MD5 0fba6c912c3919ae1b978ca2d053fe07)
@@ -53,28 +54,28 @@ function(asc_add_command file out_abc)
     set(include "")
 
     foreach (inc ${arg_INCLUDE})
-        _working_path(inc ${inc})
+        working_path(inc ${inc})
         list(APPEND include -in ${inc})
     endforeach ()
 
     foreach (imp ${arg_IMPORT})
-        _working_path(imp ${imp})
+        working_path(imp ${imp})
         list(APPEND import -import ${imp})
     endforeach ()
 
     foreach (sup ${arg_SUPPORT})
-        _get_abc_file(sup_abc ${sup})
+        abc_file(sup_abc ${sup})
         list(APPEND abc ${sup_abc})
-        _working_path(sup ${sup})
-        _working_path(sup_abc ${sup_abc})
+        working_path(sup ${sup})
+        working_path(sup_abc ${sup_abc})
         list(APPEND commands COMMAND ${ASC} ${arg_ASC_ARGUMENTS} ${import} ${sup})
         list(APPEND import -import ${sup_abc})
     endforeach ()
 
-    _abc_file(target_abc ${file})
+    abc_file(target_abc ${file})
     list(APPEND abc ${target_abc})
 
-    _working_path(target ${file})
+    working_path(target ${file})
     list(APPEND commands COMMAND ${ASC} ${arg_ASC_ARGUMENTS} ${import} ${include} ${target})
 
     add_custom_command(OUTPUT ${abc}
@@ -84,21 +85,5 @@ function(asc_add_command file out_abc)
 
     if (out_abc)
         set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
-endfunction()
-
-function(_working_path out_var file)
-    get_filename_component(file_abs ${file} ABSOLUTE)
-    file(RELATIVE_PATH file_work ${working_directory} ${file_abs})
-    set(${out_var} ${file_work} PARENT_SCOPE)
-endfunction()
-
-function(_abc_file out_var file)
-    get_filename_component(path ${file} DIRECTORY)
-    get_filename_component(name ${file} NAME_WLE)
-    if (path)
-        set(${out_var} ${path}/${name}.abc PARENT_SCOPE)
-    else ()
-        set(${out_var} ${name}.abc PARENT_SCOPE)
     endif ()
 endfunction()

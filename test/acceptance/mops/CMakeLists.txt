@@ -5,6 +5,6 @@ avm_test(ADD *.as
         TARGET test_mops
         LABELS acceptance mops)
 
-avm_add_test(test_mops_mops mops.precompiled.abc
+avm_test(ADD mops.precompiled.abc
         AVM_ARGUMENTS -Dnogc
         LABELS acceptance mops)

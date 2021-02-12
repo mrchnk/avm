@@ -1,4 +1,5 @@
 find_package(Java REQUIRED COMPONENTS Runtime)
+include(utils)
 
 set(ABCASM_URL https://github.com/mrchnk/abcasm/releases/download/v4.0/abcasm.jar)
 set(ABCASM_MD5 2f21252872a24cbeeea97a57b4f32e4f)
@@ -37,9 +38,9 @@ function(abcasm_add_command file out_abc)
 
     get_filename_component(file ${file} ABSOLUTE)
 
-    _get_abc_file(abc ${file})
+    abc_file(abc ${file})
 
-    _working_path(target ${file})
+    working_path(target ${file})
     get_filename_component(output_directory ${target} DIRECTORY)
     if (NOT output_directory)
         set(output_directory .)
@@ -52,21 +53,5 @@ function(abcasm_add_command file out_abc)
 
     if (out_abc)
         set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
-endfunction()
-
-function(_working_path out_var file)
-    get_filename_component(file_abs ${file} ABSOLUTE)
-    file(RELATIVE_PATH file_work ${working_directory} ${file_abs})
-    set(${out_var} ${file_work} PARENT_SCOPE)
-endfunction()
-
-function(_get_abc_file out_var file)
-    get_filename_component(path ${file} DIRECTORY)
-    get_filename_component(name ${file} NAME_WLE)
-    if (path)
-        set(${out_var} ${path}/${name}.abc PARENT_SCOPE)
-    else ()
-        set(${out_var} ${name}.abc PARENT_SCOPE)
     endif ()
 endfunction()
