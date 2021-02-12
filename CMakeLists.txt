@@ -5,22 +5,15 @@ set(CMAKE_CXX_STANDARD 11)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-enable_testing()
 include(CTest)
 include(GoogleTest)
-set(BUILD_GMOCK OFF)
-set(INSTALL_GTEST OFF)
-if (${CMAKE_HOST_WIN32})
-    set(gtest_force_shared_crt ON)
-endif()
-add_subdirectory(third_party/gtest)
-
-add_definitions(-DAVMSHELL_BUILD)
-add_definitions(-DDEBUGGER)
 include(platform)
 
 find_package(ASC)
 find_package(ABCASM)
+
+add_compile_definitions(AVMSHELL_BUILD)
+add_compile_definitions(DEBUGGER)
 
 add_subdirectory(core)
 add_subdirectory(platform)
@@ -36,4 +29,13 @@ add_subdirectory(other-licenses/lzma)
 add_subdirectory(other-licenses/zlib)
 add_subdirectory(nanojit)
 
-add_subdirectory(test)
+if (BUILD_TESTING)
+    add_subdirectory(test)
+
+    set(BUILD_GMOCK OFF)
+    set(INSTALL_GTEST OFF)
+    if (${CMAKE_HOST_WIN32})
+        set(gtest_force_shared_crt ON)
+    endif()
+    add_subdirectory(third_party/gtest)
+endif()
