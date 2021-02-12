@@ -915,7 +915,7 @@ function main() {
 
     s = newString();
     s += "\n\n";
-    s += "#include \"avmplus.h\"\n\n";
+    s += "#include <core/avmplus.h>\n\n";
     s += "#ifdef AVMSHELL_BUILD\n\n";
     s += "// The string avmfeatures contains the names of all features that were enabled\n";
     s += "// when the program was compiled.  Each feature name is terminated by a semicolon.\n";
