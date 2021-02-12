@@ -1,5 +1,5 @@
 add_library(core
-        generated/avmfeatures.cpp
+        src/avmfeatures.cpp
         src/AbcEnv.cpp
         src/AbcParser.cpp
         src/ActionBlockConstants.cpp
@@ -33,7 +33,7 @@ add_library(core
         src/DomainMgr.cpp
         src/E4XNode.cpp
         src/ErrorClass.cpp
-        generated/ErrorConstants.cpp
+        src/ErrorConstants.cpp
         src/Exception.cpp
         src/exec.cpp
         src/exec-jit.cpp
@@ -61,7 +61,7 @@ add_library(core
         src/NativeFunction.cpp
         src/NumberClass.cpp
         src/ObjectClass.cpp
-        generated/peephole.cpp
+        src/peephole.cpp
         src/PoolObject.cpp
         src/PrintWriter.cpp
         src/PromiseChannelGlue.cpp
@@ -111,7 +111,7 @@ include(peephole)
 target_link_libraries(core AVMPI MMgc pcre lzma nanojit zlib)
 target_include_directories(core
         PRIVATE
-        src generated include/core
+        src generated
         INTERFACE
         include)
 

@@ -5,12 +5,23 @@ set(CMAKE_CXX_STANDARD 11)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 
-include(CTest)
-include(GoogleTest)
-include(platform)
-
 find_package(ASC)
 find_package(ABCASM)
+
+if (CMAKE_HOST_WIN32)
+    enable_language(ASM_MASM)
+    add_compile_definitions(WIN32)
+    add_compile_definitions(_M_X64)
+elseif (CMAKE_HOST_APPLE)
+    add_compile_definitions(_MAC)
+elseif (CMAKE_HOST_UNIX)
+    add_compile_definitions(UNIX)
+    set(THREADS_PREFER_PTHREAD_FLAG ON)
+    find_package(Threads REQUIRED)
+endif ()
+
+include(CTest)
+include(GoogleTest)
 
 add_compile_definitions(AVMSHELL_BUILD)
 add_compile_definitions(DEBUGGER)
@@ -34,7 +45,7 @@ if (BUILD_TESTING)
 
     set(BUILD_GMOCK OFF)
     set(INSTALL_GTEST OFF)
-    if (${CMAKE_HOST_WIN32})
+    if (CMAKE_HOST_WIN32)
         set(gtest_force_shared_crt ON)
     endif()
     add_subdirectory(third_party/gtest)
