@@ -77,7 +77,7 @@ function(asc_add_command file out_abc)
     _working_path(target ${file})
     list(APPEND commands COMMAND ${ASC} ${arg_ASC_ARGUMENTS} ${import} ${include} ${target})
 
-    add_custom_command(OUTPUT ${target_abc}
+    add_custom_command(OUTPUT ${abc}
             ${commands}
             VERBATIM
             WORKING_DIRECTORY ${working_directory})
