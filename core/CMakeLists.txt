@@ -106,7 +106,7 @@ include(nativegen)
 include(apivergen)
 include(exactgc)
 include(errorgen)
-
+include(peephole)
 
 target_link_libraries(core AVMPI MMgc pcre lzma nanojit zlib)
 target_include_directories(core
@@ -133,8 +133,11 @@ exactgc("${exactgc_as};${exactgc_h}" avmplus
         generated/avmplus-tracers.hh
         generated/avmplus-tracers.h)
 
+peephole(peephole.tbl src/wopcodes.cpp generated/peephole.cpp)
+
 add_custom_target(core_generated
         DEPENDS ${BUILTIN_ABC} ${NATIVEGENS} ${APIVERGENS} ${ERRORGENS}
+        generated/peephole.cpp
         generated/avmplus-tracers.hh
         generated/avmplus-tracers.h)
 
