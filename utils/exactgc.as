@@ -5,8 +5,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 // exactgc.as generates exact tracing code from annotated classes.  It
-// is usually run by builtin-tracers.py, shell_toplevel-tracers.py,
-// and similar scripts, and occasionally cooperates with nativegen.py.
+// is usually run by cmake function exactgc()
 //
 // The <a href="doc/mmgc/exactgc-cookbook.html">cookbook</a> provides a gentle
 // introduction to annotations; most people need look no further.
