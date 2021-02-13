@@ -24,7 +24,7 @@ include(CTest)
 include(GoogleTest)
 
 add_compile_definitions(AVMSHELL_BUILD)
-add_compile_definitions(DEBUGGER)
+add_compile_definitions(AVMFEATURE_DEBUGGER)
 add_compile_definitions(AVMFEATURE_HALFMOON)
 
 add_subdirectory(core)
