@@ -16,6 +16,7 @@ add_subdirectory(misc)
 add_subdirectory(mmgc)
 
 add_dependencies(test_performance
+        test_performance_report
         test_performance_asmicro
         test_performance_jsmicro
         test_performance_floating_point
