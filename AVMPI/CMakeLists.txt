@@ -5,23 +5,23 @@ target_sources(AVMPI
         AvmAssert.cpp
         float4Support.cpp)
 
-if (${CMAKE_HOST_WIN32})
+if (CMAKE_HOST_WIN32)
     target_sources(AVMPI
             PRIVATE
             MMgcPortWin.cpp
             SpyUtilsWin.cpp)
-elseif(${CMAKE_HOST_APPLE})
+elseif (CMAKE_HOST_APPLE)
     target_sources(AVMPI
             PRIVATE
             PosixMMgcPortUtils.cpp
             MMgcPortMac.cpp
             SpyUtilsPosix.cpp)
-elseif(${CMAKE_HOST_UNIX})
+elseif (CMAKE_HOST_UNIX)
     target_sources(AVMPI
             PRIVATE
             PosixMMgcPortUtils.cpp
             MMgcPortUnix.cpp)
-endif()
+endif ()
 
 target_link_libraries(AVMPI VMPI shell)
 target_include_directories(AVMPI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
