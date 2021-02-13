@@ -24,7 +24,7 @@ function(avm_test command glob)
         if (arg_TARGET)
             add_custom_target(${arg_TARGET} DEPENDS ${abcs})
         else()
-            get_directory_property(dir_abcs AVM_TEST_ABC)
+            get_directory_property(dir_abcs AVM_TEST_ABCS)
             set_directory_properties(PROPERTIES
                     AVM_TEST_ABCS "${dir_abcs};${abcs}")
         endif()
