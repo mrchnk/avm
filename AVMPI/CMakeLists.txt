@@ -3,10 +3,7 @@ add_library(AVMPI "")
 target_sources(AVMPI
         PRIVATE
         AvmAssert.cpp
-        float4Support.cpp
-
-        PUBLIC
-        AVMPI.h)
+        float4Support.cpp)
 
 if (${CMAKE_HOST_WIN32})
     target_sources(AVMPI

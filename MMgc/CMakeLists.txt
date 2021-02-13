@@ -17,8 +17,7 @@ add_library(MMgc
         GCThreads.cpp
         PageMap.cpp
         ZCT.cpp
-        GCGlobalNew.cpp
-        GCTypes.h)
+        GCGlobalNew.cpp)
 
 target_link_libraries(MMgc vmbase)
 target_include_directories(MMgc PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

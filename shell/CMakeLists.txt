@@ -20,7 +20,8 @@ if (CMAKE_HOST_WIN32)
     target_sources(shell
             PRIVATE
             src/WinFile.cpp)
-    target_sources(avm PRIVATE
+    target_sources(avm
+            PRIVATE
             src/avmshellWin.cpp)
     target_link_libraries(avm PRIVATE shell)
 elseif (CMAKE_HOST_APPLE)
@@ -28,7 +29,8 @@ elseif (CMAKE_HOST_APPLE)
             PRIVATE
             src/PosixFile.cpp
             src/PosixPartialPlatform.cpp)
-    target_sources(avm PRIVATE
+    target_sources(avm
+            PRIVATE
             src/avmshellMac.cpp)
     target_link_libraries(avm PRIVATE shell)
 elseif (CMAKE_HOST_UNIX)
@@ -36,7 +38,8 @@ elseif (CMAKE_HOST_UNIX)
             PRIVATE
             src/PosixFile.cpp
             src/PosixPartialPlatform.cpp)
-    target_sources(avm PRIVATE
+    target_sources(avm
+            PRIVATE
             src/avmshellUnix.cpp)
     target_link_libraries(avm PRIVATE shell Threads::Threads)
 endif ()

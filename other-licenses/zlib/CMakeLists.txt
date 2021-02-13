@@ -10,7 +10,6 @@ add_library(zlib
         inftrees.c
         trees.c
         uncompr.c
-        zutil.c
-        zlib.h)
+        zutil.c)
 
 target_include_directories(zlib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
