@@ -14,8 +14,8 @@
 #include <core/avmplus.h>
 
 #ifdef VMCFG_HALFMOON
-#include "CodegenLIR.h"
-#include "../core/Interpreter.h"
+#include <core/CodegenLIR.h>
+#include <core/Interpreter.h>
 
 //#define DOPROF
 #include "../vprof/vprof.h"

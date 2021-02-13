@@ -5,10 +5,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #include <core/avmplus.h>
-#include "Interpreter.h"
+#include <core/Interpreter.h>
 
 #ifdef VMCFG_NANOJIT
-#include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 
 #ifdef VMCFG_SHARK
 #include <dlfcn.h> // dl apis for JITLoggingObserver

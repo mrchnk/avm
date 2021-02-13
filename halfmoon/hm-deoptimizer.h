@@ -7,10 +7,10 @@
 #ifndef HM_DEOPT
 #define HM_DEOPT
 
-#include "../core/avmplus.h"
+#include <core/avmplus.h>
 
 #ifdef VMCFG_HALFMOON
-#include "../core/Deopt.h"     // DeoptContext
+#include <core/Deopt.h>     // DeoptContext
 
 /// From the Google C++ Style Guide.
 /// TODO: Move to a more generally-accessible location.

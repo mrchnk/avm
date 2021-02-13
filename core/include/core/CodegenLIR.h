@@ -7,8 +7,8 @@
 #ifndef __avmplus_CodegenLIR__
 #define __avmplus_CodegenLIR__
 
-#include "LirHelper.h"
-#include "InvokerCompiler.h"
+#include "../../src/LirHelper.h"
+#include "../../src/InvokerCompiler.h"
 
 #if defined(VMCFG_INTERRUPT_SAFEPOINT_POLL) && !defined(NJ_SAFEPOINT_POLLING_SUPPORTED)
 #error "configuration error: safepoint polling not supported on this platform"
@@ -617,6 +617,6 @@ namespace avmplus
     };
 }
 
-#include "CodegenLIR-inlines.h"
+#include "../../src/CodegenLIR-inlines.h"
 
 #endif /* __avmplus_CodegenLIR__ */

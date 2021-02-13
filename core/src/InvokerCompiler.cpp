@@ -8,7 +8,7 @@
 
 #ifdef VMCFG_NANOJIT
 
-#include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 
 
 //

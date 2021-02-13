@@ -6,6 +6,7 @@
 
 
 #include <shell/avmshell.h>
+#include <core/Deopt.h>
 
 namespace avmshell
 {

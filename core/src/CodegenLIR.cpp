@@ -9,7 +9,7 @@
 
 #ifdef VMCFG_NANOJIT
 
-#include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 #include "exec-osr.h"
 
 #if defined(WIN32) && defined(AVMPLUS_ARM)

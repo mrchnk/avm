@@ -7,7 +7,7 @@
 #include <core/avmplus.h>
 
 #ifdef VMCFG_NANOJIT
-#include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 #include "FrameState.h"
 #include "exec-osr.h"
 

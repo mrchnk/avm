@@ -6,7 +6,7 @@
 
 #include <core/avmplus.h>
 #include "../vprof/vprof.h"
-#include "Interpreter.h"
+#include <core/Interpreter.h>
 
 namespace avmplus {
 

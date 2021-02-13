@@ -8,7 +8,7 @@
 #include <core/avmplus.h>
 
 #ifdef VMCFG_NANOJIT
-#  include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 #endif
 
 namespace avmplus

@@ -9,7 +9,7 @@
 #ifdef FEATURE_NANOJIT
 
 #ifdef VMCFG_VTUNE
-#include "../core/CodegenLIR.h"
+#include <core/CodegenLIR.h>
 #endif
 
 #ifdef _MSC_VER

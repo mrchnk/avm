@@ -18,7 +18,7 @@
 #include <core/avmplus.h>
 
 #ifdef VMCFG_HALFMOON
-#include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 
 namespace profiler {
 using avmplus::CodegenLIR;

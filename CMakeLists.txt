@@ -25,6 +25,7 @@ include(GoogleTest)
 
 add_compile_definitions(AVMSHELL_BUILD)
 add_compile_definitions(DEBUGGER)
+add_compile_definitions(AVMFEATURE_HALFMOON)
 
 add_subdirectory(core)
 add_subdirectory(platform)
@@ -39,6 +40,7 @@ add_subdirectory(pcre)
 add_subdirectory(other-licenses/lzma)
 add_subdirectory(other-licenses/zlib)
 add_subdirectory(nanojit)
+add_subdirectory(halfmoon)
 
 if (BUILD_TESTING)
     add_subdirectory(test)

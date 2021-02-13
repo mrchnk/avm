@@ -6,7 +6,7 @@
 
 
 #include <core/avmplus.h>
-#include "Interpreter.h"
+#include <core/Interpreter.h>
 
 #ifdef VMCFG_NANOJIT
 #   include "exec-osr.h"

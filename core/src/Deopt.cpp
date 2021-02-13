@@ -8,9 +8,9 @@
 
 #ifdef VMCFG_HALFMOON
 
-#include "CodegenLIR.h"
-#include "Deopt.h"
-#include "Interpreter.h"
+#include <core/CodegenLIR.h>
+#include <core/Deopt.h>
+#include <core/Interpreter.h>
 
 namespace framelib {
     // Implementations of these functions are platform specific.

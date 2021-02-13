@@ -10,10 +10,10 @@
 //#ifdef VMCFG_HALFMOON
 #if 0
 
-#include "CodegenLIR.h"
-#include "Deopt.h"
+#include <core/CodegenLIR.h>
+#include <core/Deopt.h>
 #include "Deopt-CL.h"
-#include "Interpreter.h"
+#include <core/Interpreter.h>
 
 namespace avmplus
 {

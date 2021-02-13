@@ -41,7 +41,7 @@ elseif (CMAKE_HOST_UNIX)
     target_link_libraries(avm PRIVATE shell Threads::Threads)
 endif ()
 
-target_link_libraries(shell extensions core vmbase eval)
+target_link_libraries(shell extensions core vmbase eval halfmoon)
 target_include_directories(core
         PRIVATE
         src generated

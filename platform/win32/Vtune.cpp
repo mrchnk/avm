@@ -7,7 +7,7 @@
 
 
 #ifdef VMCFG_VTUNE
-#include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 
 namespace vtune
 {

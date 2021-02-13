@@ -9,7 +9,7 @@
 #include "BuiltinNatives.h"
 
 #ifdef VMCFG_NANOJIT
-#include "CodegenLIR.h"
+#include <core/CodegenLIR.h>
 #endif
 
 //GCC only allows intrinsics if sse2 is enabled
