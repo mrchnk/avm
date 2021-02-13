@@ -575,6 +575,6 @@ REALLY_INLINE vmpi_thread_t VMPI_nullThread()
     return rtn;
 }
 
-#include "../VMPI/ThreadsPosix-inlines.h"
+#include "ThreadsPosix-inlines.h"
 
 #endif // __avmplus_unix_platform__

@@ -1,5 +1,3 @@
-enable_language(ASM_MASM)
-
 target_sources(platform
         PRIVATE
         coff.cpp

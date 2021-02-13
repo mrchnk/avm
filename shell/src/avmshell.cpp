@@ -14,7 +14,7 @@
 #include "../generated/avmshell-tracers.hh"
 
 #ifdef VMCFG_HALFMOON
-#include "../halfmoon/hm-main.h"  //  halfmoon::enable_mode
+#include "hm-main.h"  //  halfmoon::enable_mode
 #endif
 
 namespace avmshell
@@ -1320,7 +1320,7 @@ namespace avmshell
         avmplus::AvmLog("          [-Ojit]       use jit always, never interp (except when the jit fails)\n");
         avmplus::AvmLog("          [-Dcheckjitpageflags] check page protection flags on JIT memory allocation (sometimes expensive)\n");
 #ifdef VMCFG_HALFMOON
-        avmplus::AvmLog("          [-Dhalfmoon   use experimental 'halfmoon' jit (development only)\n");
+        avmplus::AvmLog("          [-Dhalfmoon]  use experimental 'halfmoon' jit (development only)\n");
 #endif
         avmplus::AvmLog("          [-Djitordie]  use jit always, and abort when the jit fails\n");
         avmplus::AvmLog("          [-Dnocse]     disable CSE optimization\n");

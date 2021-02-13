@@ -6,10 +6,9 @@
 
 
 #include <core/avmplus.h>
-#include "zlib.h"
 
-// Bugzilla 729336 followup: fix project files to add lzma to search path
-#include "../other-licenses/lzma/LzmaLib.h"
+#include "zlib.h"
+#include "LzmaLib.h"
 
 // Compiler and architecture dependent byte swapping functions.
 //

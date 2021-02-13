@@ -1,19 +1,13 @@
-/* -*- c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4 -*-
-   vi: set ts=4 sw=4 expandtab: (add to ~/.vimrc: set modeline modelines=5)
-
- * This Source Code Form is subject to the terms of the Mozilla Public
+/* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
-
-   This file defines the feature set for avmplus.
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+/* This file defines the feature set for avmplus.
 
    It is also a program to transform the feature definition into three files:
 
      * a C++ header file, avmfeatures.h
      * a C++ source file, avmfeatures.cpp
      * a Python file, ../build/avmfeatures.py
-
 
    The feature set is defined as an XML (really E4X) datum, see below.
 

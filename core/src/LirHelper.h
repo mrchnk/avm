@@ -8,7 +8,7 @@
 #define __avmplus_LirHelper__
 
 using namespace MMgc;
-#include "../nanojit/nanojit.h"
+#include "nanojit.h"
 
 namespace halfmoon {
     class JitManager;

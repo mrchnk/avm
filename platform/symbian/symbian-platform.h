@@ -163,6 +163,6 @@ REALLY_INLINE void VMPI_spinloopPause()
 
 #define EMULATE_ATOMICS_WITH_PTHREAD_MUTEX
 
-#include "../VMPI/ThreadsPosix-inlines.h"
+#include "ThreadsPosix-inlines.h"
 
 #endif // __avmplus_symbian_platform__
