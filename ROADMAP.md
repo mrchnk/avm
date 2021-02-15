@@ -10,7 +10,7 @@ Easy to run, easy to build, easy to extend:
 Roadmap
 -------
 
-- [ ] CMake-based build
+- [x] CMake-based build
 - [ ] CI build and test
 - [ ] Dockerized application
 - [ ] Documentation for parts of that repository

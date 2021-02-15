@@ -13,7 +13,39 @@ Work in progress...
 How to build
 ------------
 
-Work in progress...
+Before start make sure you checked out git submodules.
+
+You need cmake to build the project. Also to re-generate auto-generated 
+code (is not requiered) and building tests you need python3 and java 
+runtime (included using FindPython3 and FindJava packages from cmake)
+
+    avm$ cmake -S . -B build
+    ...
+    -- Build files have been written to: .../avm/build
+
+    avm$ cmake --build build --target avm
+    ... a bunch of compilation warnings
+
+    avm$ build/shell/avm -Dversion
+    shell 2.1 release-debugger build cyclone
+    features AVMSYSTEM_64BIT;...
+
+For Windows you need to specify architecture for Visual Studio generator.
+
+    avm> cmake -S . -B build -A x64 -G "Visual Studio 15 2017"
+
+Supported platforms and compilers
+---------------------------------
+
+Current project configuration is targeting x86_64 build with following
+cmake generators supported and tested:
+
+- Visual Studio under Windows (2017 was tested)
+- NMake Makefiles under Windows
+- Xcode under MacOS
+- Unix Makefiles under MacOS and Unix 
+
+Right now it is also required to have Python3 executable and Java runtime
 
 What that project is for
 ------------------------
