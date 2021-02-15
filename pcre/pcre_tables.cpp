@@ -1,4 +1,4 @@
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 /*************************************************
 *      Perl-Compatible Regular Expressions       *

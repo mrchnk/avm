@@ -5,7 +5,7 @@
 #include <e32math.h>
 #include <math.h> // no Symbian equivalent of frexp, ceil, floor.
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 namespace avmplus
 {

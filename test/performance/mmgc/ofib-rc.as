@@ -49,6 +49,6 @@ package
     for ( i=0 ; i < 500 ; i++ )
                 tmp[i] = null;
     var now = new Date();
-    print("metric time " + (now - then));
+    REPORT('ofib-rc', 'time', now - then);
 }
 

@@ -35,7 +35,7 @@
  *
  * ***** END LICENSE BLOCK ***** */
 // Initialization code for generated selftest code
-#include "avmshell.h"
+#include <shell/avmshell.h>
 namespace avmplus {
 #ifdef VMCFG_SELFTEST
 namespace ST_avmplus_basics {

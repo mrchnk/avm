@@ -6,8 +6,9 @@
 
 #include "VMPI.h"
 
+#include <ctime>
 #include <Mmsystem.h>
-#include <time.h>
+#pragma comment(lib, "Winmm")
 
 /*
 * Windows implementation of platform-dependent date and time code

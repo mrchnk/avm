@@ -15,8 +15,7 @@ function TEST(run:Function, tag:String) {
         iterations++;
         run();
     }
-    print('name ' + tag);
-    print('metric iterations/second ' + iterations/((now-then)/1000.0));
+    REPORT(tag, 'iterations/second', iterations/((now-then)/1000.0));
 }
 
 // Run the function 'init' and then the function 'run', and accumulate
@@ -36,6 +35,5 @@ function TEST3(init:Function, run:Function, tag:String) {
         var now = new Date();
         time += (now - then);
     }
-    print('name ' + tag);
-    print('metric iterations/second ' + iterations/((time)/1000.0));
+    REPORT(tag, 'iterations/second', iterations/((time)/1000.0));
 }

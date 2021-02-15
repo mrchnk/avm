@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 namespace avmplus
 {

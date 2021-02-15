@@ -2,6 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-function print(s) {
-    document.writeln(s);
+function REPORT(name, metric, value) {
+    document.writeln('name ' + name + '<br>')
+    document.writeln('metric ' + metric + ' ' + value + '<br>');
 }

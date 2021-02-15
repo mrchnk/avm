@@ -14,4 +14,4 @@ function sfib(n) {
 var then = new Date();
 sfib(param);
 var now = new Date();
-print("metric time " + (now - then));
+REPORT('sfib', 'time', now - then);

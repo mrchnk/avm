@@ -14,7 +14,7 @@
 
 // Anyway to include nanojit allocators / contains w/o including the header here?
 // Only methodprofile.cpp should include this file as well
-#include "../nanojit/nanojit.h"
+#include "nanojit.h"
 
 namespace profiler {
 class ProfiledState;

@@ -1,0 +1,56 @@
+add_custom_target(test_as3)
+
+add_subdirectory(AbcDecoder)
+add_subdirectory(AMF)
+add_subdirectory(Array)
+add_subdirectory(ByteArray)
+add_subdirectory(Definitions)
+add_subdirectory(DescribeType)
+add_subdirectory(Directives)
+add_subdirectory(ErrorObject)
+add_subdirectory(Expressions)
+add_subdirectory(Float)
+add_subdirectory(Float4)
+add_subdirectory(GlobalObject)
+add_subdirectory(Int)
+add_subdirectory(Math)
+add_subdirectory(MethodClosures)
+add_subdirectory(Proxy)
+add_subdirectory(RegExp)
+add_subdirectory(RuntimeErrors)
+add_subdirectory(sampling)
+add_subdirectory(ShellClasses)
+add_subdirectory(Statements)
+add_subdirectory(String)
+add_subdirectory(TypeConversion)
+add_subdirectory(UInt)
+add_subdirectory(Vector)
+add_subdirectory(Workers)
+
+add_dependencies(test_as3
+        test_as3_AbcDecoder
+        test_as3_AMF
+        test_as3_Array
+        test_as3_ByteArray
+        test_as3_Definitions
+        test_as3_DescribeType
+        test_as3_Directives
+        test_as3_ErrorObject
+        test_as3_Expressions
+        test_as3_Float
+        test_as3_Float4
+        test_as3_GlobalObject
+        test_as3_Int
+        test_as3_Math
+        test_as3_MethodClosures
+        test_as3_Proxy
+        test_as3_RegExp
+        test_as3_RuntimeErrors
+        test_as3_sampling
+        test_as3_ShellClasses
+        test_as3_Statements
+        test_as3_String
+        test_as3_TypeConversion
+        test_as3_UInt
+        test_as3_Vector
+        test_as3_Workers)

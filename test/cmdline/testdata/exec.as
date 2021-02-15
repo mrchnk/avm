@@ -4,5 +4,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 import avmplus.System
-out2=System.exec('pwd')
-print("result="+out2)
+var cmd:String = System.argv[0];
+print("Command to exec: " + cmd);
+var result:* = System.exec(cmd);
+print("result="+result)

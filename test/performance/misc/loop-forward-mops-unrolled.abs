@@ -1,0 +1,193 @@
+/* -*- mode: asm -*- */
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+// Forward int sum unrolled loop, 2048 elements
+
+function setup()
+{
+        getlocal0
+        pushscope
+
+        // Construct the memory
+        findproperty NEW_BYTEARRAY
+        callproperty NEW_BYTEARRAY 0
+        dup
+        setlocal1
+        pushint 8192
+        setproperty length
+
+        // Initialize the memory to all "1" values
+        getlocal1
+        pushstring "littleEndian"
+        setproperty endian
+        
+        pushint 0
+        setlocal2
+L1:     label
+        getlocal2
+        pushint 2048
+        ifeq L2
+        getlocal1
+        pushint 1
+        callproperty writeInt (1)
+        pop
+        inclocal 2
+        jump L1
+L2:     label
+        getlocal1
+        pushint 0
+        setproperty position
+
+        // Install the memory
+        findproperty GET_DOMAIN
+        callproperty GET_DOMAIN 0
+        getlocal1
+        setproperty domainMemory
+
+        returnvoid
+}
+        
+function loop()
+{
+        getlocal0
+        pushscope
+
+        // check-summ
+        pushint 0
+        setlocal3
+
+        pushint 0
+        setlocal1
+
+L2:     label
+        getlocal1
+        pushint 8192
+        ifeq L3
+
+        // Unroll: #1
+        getlocal1
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        // Unroll: #2
+        getlocal1
+        pushint 4
+        add
+        coerce_i
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        // Unroll: #3
+        getlocal1
+        pushint 8
+        add
+        coerce_i
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        // Unroll: #4
+        getlocal1
+        pushint 12
+        add
+        coerce_i
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        // Unroll: #5
+        getlocal1
+        pushint 16
+        add
+        coerce_i
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        // Unroll: #6
+        getlocal1
+        pushint 20
+        add
+        coerce_i
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        // Unroll: #7
+        getlocal1
+        pushint 24
+        add
+        coerce_i
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        // Unroll: #8
+        getlocal1
+        pushint 28
+        add
+        coerce_i
+        li32
+        getlocal3
+        add
+        coerce_i
+        setlocal3
+        
+        getlocal1
+        pushint 32
+        add
+        coerce_i
+        setlocal1
+
+        jump L2
+
+L3:     label
+
+        // Just check the sum
+        getlocal3
+        pushint 2048
+        ifeq L4
+        pushstring "MOPS unrolled forward: Unexpected result: "
+        getlocal3
+        add
+        throw
+
+L4:     label
+        returnvoid
+}
+
+function main()
+{
+        getlocal0
+        pushscope
+
+        findproperty TEST
+
+        newfunction setup
+        newfunction loop
+        pushstring "loop-forward-mops-unrolled"
+
+        callpropvoid TEST 3
+
+        returnvoid
+}
+
+script_info{init: main}

@@ -7,7 +7,7 @@
 #ifndef AOTCompiler_h
 #define AOTCompiler_h
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 #include "CdeclThunk.h"
 
 #ifdef VMCFG_BUFFER_GUARD

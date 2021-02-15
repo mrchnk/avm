@@ -11,7 +11,7 @@
 
 // AVMPI.h includes avmfeatures.h, which detects platforms and sets up most MMGC_ names.
 #include "AVMPI.h"
-#include "atom.h"
+#include <core/atom.h>
 
 #ifdef MMGC_VALGRIND
     // Valgrind information:

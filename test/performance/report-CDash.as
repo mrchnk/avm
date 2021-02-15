@@ -1,0 +1,10 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+package {
+
+public function REPORT(name:String, metric:String, value:Number):void {
+    print('<DartMeasurement type="numeric/double" name="' + metric + '">' + value + '</DartMeasurement>');
+}
+
+}

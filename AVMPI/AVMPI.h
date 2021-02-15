@@ -13,7 +13,7 @@
 // settings are not provided eg on the command line.
 
 #ifdef AVMSHELL_BUILD
-  #include "avmshell-features.h"
+  #include <shell/avmshell-features.h>
 #else
   /* The embedding host must provide this file in some directory that's included in
    * header search paths.  It must define a value (0 or 1) for every feature
@@ -27,7 +27,7 @@
 // the internal (VMCFG_, etc) names rather than feature names.  Eases
 // maintainability.
 
-#include "avmfeatures.h"
+#include <core/avmfeatures.h>
 
 #if AVMSYSTEM_WIN32
   #include "win32/win32-platform.h"

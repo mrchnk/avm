@@ -1,19 +1,13 @@
-/* -*- c-basic-offset: 4; indent-tabs-mode: nil; tab-width: 4 -*-
-   vi: set ts=4 sw=4 expandtab: (add to ~/.vimrc: set modeline modelines=5)
-
- * This Source Code Form is subject to the terms of the Mozilla Public
+/* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
-
-   This file defines the feature set for avmplus.
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+/* This file defines the feature set for avmplus.
 
    It is also a program to transform the feature definition into three files:
 
      * a C++ header file, avmfeatures.h
      * a C++ source file, avmfeatures.cpp
      * a Python file, ../build/avmfeatures.py
-
 
    The feature set is defined as an XML (really E4X) datum, see below.
 
@@ -908,14 +902,14 @@ function main() {
     s += "#ifdef AVMSHELL_BUILD\n";
     s += "extern const char * const avmfeatures;\n";
     s += "#endif\n\n";
-    print('writing avmfeatures.h');
-    File.write("avmfeatures.h", s);
+    print('writing generated/avmfeatures.h');
+    File.write("generated/avmfeatures.h", s);
 
     // Generate avmfeatures.cpp
 
     s = newString();
     s += "\n\n";
-    s += "#include \"avmplus.h\"\n\n";
+    s += "#include <core/avmplus.h>\n\n";
     s += "#ifdef AVMSHELL_BUILD\n\n";
     s += "// The string avmfeatures contains the names of all features that were enabled\n";
     s += "// when the program was compiled.  Each feature name is terminated by a semicolon.\n";
@@ -926,31 +920,8 @@ function main() {
         s += showFeature(feature);
     s += ";\n\n"
     s += "#endif // AVMSHELL_BUILD\n";
-    print('writing avmfeatures.cpp');
-    File.write("avmfeatures.cpp", s);
-
-    // Generate ../build/avmfeatures.py
-
-    s = newString("#");
-    s += "\n\n";
-    s += "def featureSettings(o):\n";
-    s += "    args = \"\"\n";
-    for each ( feature in FEATURES.feature )
-        s += configureFeature(feature);
-    for each ( feature in FEATURES.tweak )
-        s += configureFeature(feature);
-    s += "    return args\n";
-
-    s += "\ndef builtinBuildFlags(o):\n";
-    s += "    buildFlags = \"\"\n";
-    for each ( feature in FEATURES.feature )
-        s += featureFlags(feature);
-    for each ( feature in FEATURES.tweak )
-        s += featureFlags(feature);
-    s += "    return buildFlags\n";
-
-    print('writing ../build/avmfeatures.py');
-    File.write("../build/avmfeatures.py", s);
+    print('writing generated/avmfeatures.cpp');
+    File.write("generated/avmfeatures.cpp", s);
 }
 
 function newString(prefix="//") {

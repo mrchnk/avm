@@ -6,7 +6,7 @@
 
 #include "profiler-main.h"
 #ifdef VMCFG_HALFMOON
-#include "../halfmoon/halfmoon.h"
+#include "halfmoon.h"
 
 namespace profiler {
 

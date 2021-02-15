@@ -4,7 +4,6 @@
  
 package com.adobe.test
 {
-    import Assert;
     public class Utils
     {
         public static var GLOBAL = "[object global]";

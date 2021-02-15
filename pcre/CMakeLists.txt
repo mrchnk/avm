@@ -15,8 +15,7 @@ add_library(pcre
         pcre_valid_utf8.cpp
         pcre_version.cpp
         pcre_xclass.cpp
-        pcre_newline.cpp
-        pcre.h)
+        pcre_newline.cpp)
 
 target_link_libraries(pcre core)
 target_include_directories(pcre PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

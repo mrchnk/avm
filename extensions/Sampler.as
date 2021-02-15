@@ -6,7 +6,6 @@
 
 package flash.sampler
 {
-    include "../core/api-versions.as"
 
     /**
      * The StackFrame class provides access to the properties of a data block

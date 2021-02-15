@@ -33,11 +33,10 @@ import com.adobe.test.Assert;
 // third-party utilities (see LZMA.jar attached to Bugzilla 729336).
 function testThirdPartyLzmaInputs()
 {
-    var compressedHello:ByteArray = File.readByteArray("as3/ByteArray/ByteArrayLzmaThirdParty.abc-compressed-hello.lz");
-    var compressedSmall:ByteArray = File.readByteArray("as3/ByteArray/ByteArrayLzmaThirdParty.abc-compressed-small.lz");
-
-    var uncompressedHello:ByteArray = File.readByteArray("as3/ByteArray/ByteArrayLzmaThirdParty.abc-uncompressed-hello.txt");
-    var uncompressedSmall:ByteArray = File.readByteArray("as3/ByteArray/ByteArrayLzmaThirdParty.abc-uncompressed-small.txt");
+    var compressedHello:ByteArray = File.readByteArray("ByteArrayLzmaThirdParty.abc-compressed-hello.lz");
+    var compressedSmall:ByteArray = File.readByteArray("ByteArrayLzmaThirdParty.abc-compressed-small.lz");
+    var uncompressedHello:ByteArray = File.readByteArray("ByteArrayLzmaThirdParty.abc-uncompressed-hello.txt");
+    var uncompressedSmall:ByteArray = File.readByteArray("ByteArrayLzmaThirdParty.abc-uncompressed-small.txt");
 
     var helloString:String = uncompressedHello.readUTFBytes(uncompressedHello.length);
     var smallString:String = uncompressedSmall.readUTFBytes(uncompressedSmall.length);

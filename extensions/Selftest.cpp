@@ -6,7 +6,7 @@
 
 // Framework code
 
-#include "avmshell.h"
+#include <shell/avmshell.h>
 
 #ifdef VMCFG_SELFTEST
 

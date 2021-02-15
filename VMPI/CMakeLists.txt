@@ -2,10 +2,7 @@ add_library(VMPI "")
 
 target_sources(VMPI
         PRIVATE
-        GenericPortUtils.cpp
-
-        PUBLIC
-        VMPI.h)
+        GenericPortUtils.cpp)
 
 if (${CMAKE_HOST_WIN32})
     target_sources(VMPI
@@ -29,5 +26,5 @@ elseif (${CMAKE_HOST_UNIX})
             ThreadsPosix.cpp)
 endif()
 
-target_link_libraries(VMPI platform)
+target_link_libraries(VMPI platform shell)
 target_include_directories(VMPI PUBLIC ${CMAKE_CURRENT_LIST_DIR})

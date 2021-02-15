@@ -9,7 +9,7 @@
 // up core/avmplus.h on the line below.  Because of the PCH setup on Windows,
 // the #include cannot be conditional.
 
-#include "avmplus.h"
+#include <core/avmplus.h>
 
 namespace avmplus
 {
