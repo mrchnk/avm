@@ -1,3 +1,5 @@
+include(disable_tests)
+
 cmdline_test(selftest_mmfx_new_array_opts_canFail
         AVM_ARGUMENTS -Dselftest=mmgc,mmfx_array,mmfx_new_array_opts_canFail -memlimit 1024
         PASS_REGULAR_EXPRESSION
@@ -51,8 +53,11 @@ cmdline_test(selftest_VMbaseSafepoints
         "\\['pass', 'vmbase', 'safepoints', 'producer_consumer'\\]"
         "\\['test', 'vmbase', 'safepoints', 'nested_producer_consumer'\\]"
         "\\['pass', 'vmbase', 'safepoints', 'nested_producer_consumer'\\]"
-        "\\['end', 'vmbase', 'safepoints'\\]"
-        DISABLED) # https://bugzilla.mozilla.org/show_bug.cgi?id=754918
+        "\\['end', 'vmbase', 'safepoints'\\]")
+
+disable_tests(
+        test_cmdline_selftest_VMbaseSafepoints
+        REASON https://bugzilla.mozilla.org/show_bug.cgi?id=754918)
 
 cmdline_test(selftest_VMPIThreads
         AVM_ARGUMENTS -Dselftest=vmpi,threads
