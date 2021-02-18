@@ -96,5 +96,5 @@ jobs:
       - name: Untar abc
         run: tar -xvf test.tar
       - name: Run tests and submit to cdash
-        run: ctest -D Continuous --build-config Release
+        run: ctest -M Continuous -T Start -T Update -T Test -T Submit --build-config Release
         working-directory: build
