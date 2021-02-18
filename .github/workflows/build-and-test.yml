@@ -26,6 +26,7 @@ jobs:
           -DBUILD_DEVELOPMENT=OFF
           -DSITE=$CTEST_SITE
           -DBUILDNAME=$CTEST_BUILD_NAME
+          -DAVM_TEST_CDASH=ON
       - name: Build main targets
         run: cmake --build build --config Release
       - name: Tar binaries to preserve permissions
@@ -52,7 +53,9 @@ jobs:
             !test/**/*.precompiled.abc
           key: test_abc-${{ hashFiles('test/**/*.as', 'test/**/*.abs') }}
       - name: Generate project
-        run: cmake -S . -B build -DBUILD_DEVELOPMENT=OFF
+        run: cmake -S . -B build 
+          -DBUILD_DEVELOPMENT=OFF
+          -DAVM_TEST_CDASH=ON
       - name: Build abc for tests
         run: cmake --build build --target test_abc
       - name: Tar abc to speed-up upload and download
