@@ -1,4 +1,4 @@
-find_package(Java REQUIRED COMPONENTS Runtime)
+find_package(Java COMPONENTS Runtime)
 include(utils)
 
 set(FLEX_SDK_URL https://downloads.apache.org/flex/4.16.1/binaries/apache-flex-sdk-4.16.1-bin.tar.gz)
@@ -75,12 +75,18 @@ function(asc_add_command file out_abc)
     working_path(target ${file})
     list(APPEND commands COMMAND ${ASC} ${arg_ASC_ARGUMENTS} ${import} ${include} ${target})
 
+    if (out_abc)
+        set(${out_abc} ${abc} PARENT_SCOPE)
+    endif ()
+
+    if (NOT Java_FOUND)
+        message(WARNING "ASC: cannot generate ${abc} (java runtime required)")
+        return()
+    endif()
+
     add_custom_command(OUTPUT ${abc}
             ${commands}
             VERBATIM
             WORKING_DIRECTORY ${working_directory})
 
-    if (out_abc)
-        set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
 endfunction()

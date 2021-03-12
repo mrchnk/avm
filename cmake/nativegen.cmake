@@ -1,4 +1,4 @@
-find_package(Python3 REQUIRED COMPONENTS Interpreter)
+find_package(Python3 COMPONENTS Interpreter)
 
 set(NATIVEGEN_PY ${CMAKE_SOURCE_DIR}/utils/nativegen.py)
 
@@ -13,6 +13,11 @@ function(nativegen abcs output_directory generated)
     endforeach()
 
     set(${generated} ${output} PARENT_SCOPE)
+
+    if (NOT Python3_FOUND)
+        message(WARNING "nativegen: cannot generate ${output} (python3 interpreter required)")
+        return()
+    endif()
 
     add_custom_command(OUTPUT ${output} DEPENDS ${abc}
             COMMAND ${Python3_EXECUTABLE} ${NATIVEGEN_PY} --output=${output_directory} ${abcs}

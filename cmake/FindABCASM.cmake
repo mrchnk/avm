@@ -1,4 +1,4 @@
-find_package(Java REQUIRED COMPONENTS Runtime)
+find_package(Java COMPONENTS Runtime)
 include(utils)
 
 set(ABCASM_URL https://github.com/mrchnk/abcasm/releases/download/v4.0/abcasm.jar)
@@ -46,12 +46,17 @@ function(abcasm_add_command file out_abc)
         set(output_directory .)
     endif ()
 
+    if (out_abc)
+        set(${out_abc} ${abc} PARENT_SCOPE)
+    endif ()
+
+    if (NOT Java_FOUND)
+        message(WARNING "ABCASM: cannot generate ${abc} (java runtime required)")
+        return()
+    endif()
+
     add_custom_command(OUTPUT ${abc}
             COMMAND ${ABCASM} -input ${target} -o ${output_directory}
             VERBATIM
             WORKING_DIRECTORY ${working_directory})
-
-    if (out_abc)
-        set(${out_abc} ${abc} PARENT_SCOPE)
-    endif ()
 endfunction()
