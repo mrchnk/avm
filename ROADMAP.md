@@ -11,7 +11,7 @@ Roadmap
 -------
 
 - [x] CMake-based build
-- [ ] CI build and test
+- [x] CI build and test
 - [ ] Dockerized application
 - [ ] Documentation for parts of that repository
 - [ ] Separate AVM+ runtime as dynamic library

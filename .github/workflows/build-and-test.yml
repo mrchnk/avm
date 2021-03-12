@@ -1,0 +1,103 @@
+name: CI
+
+on: [push]
+
+jobs:
+
+  build-all:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+    steps:
+      - name: Checkout source code recursively
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Generate project
+        env:
+          CTEST_SITE: github.com
+          CTEST_BUILD_NAME: ${{ matrix.os }}.github.com
+        shell: bash
+        run: cmake -S . -B build
+          -DBUILD_DEVELOPMENT=OFF
+          -DSITE=$CTEST_SITE
+          -DBUILDNAME=$CTEST_BUILD_NAME
+          -DAVM_TEST_CDASH=ON
+      - name: Build main targets
+        run: cmake --build build --config Release
+      - name: Tar binaries to preserve permissions
+        run: tar -cvf build.tar build
+      - name: Upload project and targets as artifcats
+        uses: actions/upload-artifact@v2
+        with:
+          path: build.tar
+          name: all-${{ runner.os }}
+          retention-days: 1
+
+  build-test_abc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code recursively
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Cache test abc
+        uses: actions/cache@v2
+        with:
+          path: |
+            test/**/*.abc
+            !test/**/*.precompiled.abc
+          key: test_abc-${{ hashFiles('test/**/*.as', 'test/**/*.abs') }}
+      - name: Generate project
+        run: cmake -S . -B build 
+          -DBUILD_DEVELOPMENT=OFF
+          -DAVM_TEST_CDASH=ON
+      - name: Build abc for tests
+        run: cmake --build build --target test_abc
+      - name: Tar abc to speed-up upload and download
+        shell: bash
+        run: find test -name "*.abc" -and -not -name "*.precompiled.abc"
+          -exec tar -rvf test.tar {} \;
+      - name: Upload abc as artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: test.tar
+          name: test_abc
+          retention-days: 1
+
+  test:
+    runs-on: ${{ matrix.os }}
+    needs: [ build-all, build-test_abc ]
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+          - macos-latest
+          - ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 2
+      - name: Reset to prev commit before run to track changes for ctest/cdash
+        run: git reset --keep HEAD^
+      - name: Download project and targets from artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: all-${{ runner.os }}
+      - name: Download abc from artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: test_abc
+      - name: Untar project and targets
+        run: tar -xvf build.tar
+      - name: Untar abc
+        run: tar -xvf test.tar
+      - name: Run tests and submit to cdash
+        run: ctest -M Continuous -T Start -T Update -T Test -T Submit --build-config Release
+        working-directory: build
